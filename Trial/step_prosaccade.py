@@ -8,6 +8,7 @@ from functools import partial
 
 class Step_Prosaccade(Trial):
     def __init__(self):
+        super().__init__() 
         self.fixation_min = 1000
         self.fixation_max = 1500
         self.target_duration = 1000
@@ -15,6 +16,7 @@ class Step_Prosaccade(Trial):
 
     def run(self, fixation : QGraphicsEllipseItem, target: QGraphicsEllipseItem):
         fixation_duration = randint(self.fixation_min,self.fixation_max)
+        print(fixation_duration)
         fixation.move(0, 0)
         fixation.setVisible(True)
         target.setVisible(False)
@@ -53,3 +55,4 @@ class Step_Prosaccade(Trial):
             ):
         target.setVisible(False)
         fixation.setVisible(False)
+        self.check_repeat(fixation, target)

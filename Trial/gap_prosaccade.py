@@ -6,14 +6,17 @@ from functools import partial
 
 class Gap_Prosaccade(Trial):
     def __init__(self):
+        super().__init__() 
         self.fixation_min = 1000
         self.fixation_max = 1500
         self.gap = 300
         self.target_duration = 1000
         self.shift = 400
+        self.reps = 4
 
     def run(self, fixation : QGraphicsEllipseItem, target: QGraphicsEllipseItem):
         fixation_duration = randint(self.fixation_min,self.fixation_max)
+        print(fixation_duration)
         fixation.move(0, 0)
         fixation.setVisible(True)
         target.setVisible(False)
@@ -64,3 +67,4 @@ class Gap_Prosaccade(Trial):
             ):
         target.setVisible(False)
         fixation.setVisible(False)
+        self.check_repeat(fixation, target)

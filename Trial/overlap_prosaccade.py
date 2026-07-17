@@ -6,6 +6,7 @@ from functools import partial
 
 class Overlap_Prosaccade(Trial):
     def __init__(self):
+        super().__init__() 
         self.fixation_min = 1000
         self.fixation_max = 1500
         self.gap = 300
@@ -14,6 +15,7 @@ class Overlap_Prosaccade(Trial):
 
     def run(self, fixation : QGraphicsEllipseItem, target: QGraphicsEllipseItem):
         fixation_duration = randint(self.fixation_min,self.fixation_max)
+        print(fixation_duration)
         fixation.move(0, 0)
         fixation.setVisible(True)
         target.setVisible(False)
@@ -51,3 +53,4 @@ class Overlap_Prosaccade(Trial):
             ):
         target.setVisible(False)
         fixation.setVisible(False)
+        self.check_repeat(fixation, target)

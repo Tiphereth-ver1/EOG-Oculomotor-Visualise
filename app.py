@@ -5,7 +5,7 @@ import time
 
 app = QApplication(sys.argv)
 window = MainWindow()
-window.setWindowTitle("Ringo Music")
+window.setWindowTitle("EOG Oculomotor Visualise")
 window.show()
 
 from PySide6.QtCore import QTimer

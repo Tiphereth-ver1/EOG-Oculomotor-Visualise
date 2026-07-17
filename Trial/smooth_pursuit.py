@@ -13,19 +13,22 @@ from .trajectories import (
 
 class Smooth_Pursuit(Trial):
     def __init__(self, trajectory):
+        super().__init__() 
         self.fz = 0.2
         self.test_duration_s = 5
         self.shift = 400
         self.trajectory = trajectory
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_position)
+        self.reps = 2
+        self.rest = 3000
     
     def set_trajectory(self, trajectory):
         self.trajectory = trajectory
 
     def update_position(self):
         t = time() - self.start_time
-        print(t)
+        # print(t)
         x,y = self.trajectory(t, self.shift, self.fz)
 
         self.target.move(x,y)
@@ -55,3 +58,4 @@ class Smooth_Pursuit(Trial):
     def clean_graphics(self):
         self.target.setVisible(False)
         self.fixation.setVisible(False)
+        QTimer.singleShot(self.rest, partial(self.check_repeat, self.fixation, self.target))

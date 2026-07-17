@@ -3,28 +3,37 @@ from enum import Enum
 from PySide6.QtWidgets import QGraphicsEllipseItem
 
 class Direction(Enum):
-    LEFT = 1
-    RIGHT = 2
-    UP = 3
-    DOWN = 4
+    LEFT = "left"
+    RIGHT = "right"
+    UP = "up"
+    DOWN = "down"
 
 DIRECTIONS = [Direction.LEFT, Direction.RIGHT, Direction.UP, Direction.DOWN]
 
 
 # 1. Define the abstract base class
 class Trial(ABC):
+    def __init__(self):
+        self.reps = 3
+        self.current_reps = 0
+        self.rest = 0
+    
+    def start(self, fixation : QGraphicsEllipseItem, target: QGraphicsEllipseItem):
+        self.current_reps = self.reps
+        self.run(fixation, target)
+        pass
     
     @abstractmethod
-    def run(fixation : QGraphicsEllipseItem, target: QGraphicsEllipseItem):
-        """Each processor needs api keys configured."""
+    def run(self, fixation : QGraphicsEllipseItem, target: QGraphicsEllipseItem):
+        """Run the trial for the target."""
         pass
 
-    # @abstractmethod
-    # def stop(self, amount: float):
-    #     """Each processor must implement a charge behavior."""
-    #     pass
         
-    # def reset(self, amount: float):
-    #     """Concrete method: Shared behavior inherited by all subclasses."""
-    #     print(f"Receipt generated for ${amount}")
+    def check_repeat(self, fixation : QGraphicsEllipseItem, target: QGraphicsEllipseItem):
+        print(f"Current rep: {self.current_reps}")
+        if self.current_reps > 0:
+            self.run(fixation, target)
+            self.current_reps-=1
+            
+
 
