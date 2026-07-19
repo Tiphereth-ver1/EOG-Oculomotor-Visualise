@@ -5,22 +5,29 @@ from PySide6.QtCore import Qt, QTimer
 from functools import partial
 
 class Overlap_Prosaccade(Trial):
-    def __init__(self):
+    def __init__(self,
+        fixation_min,
+        fixation_max,
+        target_duration,
+        shift,
+        reps
+    ):
         super().__init__() 
-        self.fixation_min = 1000
-        self.fixation_max = 1500
-        self.gap = 300
-        self.target_duration = 1000
-        self.shift = 400
+        self.fixation_min = fixation_min
+        self.fixation_max = fixation_max
+        self.target_duration = target_duration
+        self.shift = shift
+        self.reps = reps
+        self.fixation_duration = 0
 
     def run(self, fixation : QGraphicsEllipseItem, target: QGraphicsEllipseItem):
-        fixation_duration = randint(self.fixation_min,self.fixation_max)
-        print(fixation_duration)
+        self.fixation_duration = randint(self.fixation_min,self.fixation_max)
+        print(self.fixation_duration)
         fixation.move(0, 0)
         fixation.setVisible(True)
         target.setVisible(False)
         QTimer.singleShot(
-            fixation_duration, 
+            self.fixation_duration, 
             partial(
                 self.show_target, 
                 direction = DIRECTIONS[randint(0,4)],
@@ -40,12 +47,14 @@ class Overlap_Prosaccade(Trial):
             target.setVisible(True)
 
         if (direction == Direction.UP):
-            target.move(0,self.shift)
+            target.move(0,-self.shift)
             target.setVisible(True)
 
         if (direction == Direction.DOWN):
-            target.move(0,-self.shift)
+            target.move(0,self.shift)
             target.setVisible(True)
+        
+        self.send_message(f"Duration: {self.fixation_duration}, Direction: {direction.value}")
 
     def clean_graphics(self,
             fixation : QGraphicsEllipseItem, 

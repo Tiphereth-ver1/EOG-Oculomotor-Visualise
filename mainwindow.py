@@ -12,8 +12,9 @@ from PySide6.QtWidgets import (
     QPushButton,
 )
 
+from Trial import Experiment
 from graphics_page import Graphics_Page
-
+from data_logger import Data_Logger
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -21,6 +22,14 @@ class MainWindow(QMainWindow):
 
         self.graphics = Graphics_Page()
         self.setCentralWidget(self.graphics)
+        self.experiment : Experiment = Experiment()
+        self.logger : Data_Logger = Data_Logger()
+
+        self.experiment.logger_message.connect(self.logger.write_message)
+
+        self.experiment.show_title.connect(self.graphics.show_title)
+        self.experiment.show_instruction.connect(self.graphics.show_instruction)
+        self.experiment.clear_text.connect(self.graphics.clear_text)
 
         self.resize(1400, 800)
 
@@ -34,30 +43,18 @@ class MainWindow(QMainWindow):
         layout = QVBoxLayout(container)
 
         # Buttons
-        step_btn = QPushButton("Step Prosaccade")
-        gap_btn = QPushButton("Gap Prosaccade")
-        overlap_btn = QPushButton("Overlap Prosaccade")
-        pursuit_circle_btn = QPushButton("Smooth Pursuit: Circle")
-        pursuit_figure8_btn = QPushButton("Smooth Pursuit: Figure 8")
-        pursuit_horizontal_btn = QPushButton("Smooth Pursuit: Horizontal")
+        expt_btn = QPushButton("Experiment")
 
-        layout.addWidget(step_btn)
-        layout.addWidget(gap_btn)
-        layout.addWidget(overlap_btn)
-        layout.addWidget(pursuit_circle_btn)
-        layout.addWidget(pursuit_figure8_btn)
-        layout.addWidget(pursuit_horizontal_btn)
+        layout.addWidget(expt_btn)
         layout.addStretch()
 
         # Connect signals
-        step_btn.clicked.connect(self.graphics.step_prosaccade_run)
-        gap_btn.clicked.connect(self.graphics.gap_prosaccade_run)
-        overlap_btn.clicked.connect(self.graphics.overlap_prosaccade_run)
-        pursuit_circle_btn.clicked.connect(self.graphics.smooth_pursuit_circle_run)
-        pursuit_figure8_btn.clicked.connect(self.graphics.smooth_pursuit_figure8_run)
-        pursuit_horizontal_btn.clicked.connect(self.graphics.smooth_pursuit_horizontal_run)
+        expt_btn.clicked.connect(self.expt_start)
 
         dock.setWidget(container)
         self.addDockWidget(Qt.LeftDockWidgetArea, dock)
-    def send_signal(self):
-        self.graphics.smooth_pursuit_run()
+
+    def expt_start(self):
+        self.logger.write_message("Experimental battery started.")
+        self.experiment.start(self.graphics.fixation, self.graphics.target)
+    

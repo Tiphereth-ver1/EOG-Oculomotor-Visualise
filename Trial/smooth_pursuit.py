@@ -12,16 +12,24 @@ from .trajectories import (
 )
 
 class Smooth_Pursuit(Trial):
-    def __init__(self, trajectory):
+    def __init__(self, 
+        fz,
+        test_duration_s,
+        shift,
+        trajectory,
+        reps,
+        rest
+    ):
         super().__init__() 
-        self.fz = 0.2
-        self.test_duration_s = 5
-        self.shift = 400
+        self.fz = fz
+        self.test_duration_s = test_duration_s
+        self.shift = shift
         self.trajectory = trajectory
+        self.reps = reps
+        self.rest = rest
+
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_position)
-        self.reps = 2
-        self.rest = 3000
     
     def set_trajectory(self, trajectory):
         self.trajectory = trajectory
@@ -34,7 +42,7 @@ class Smooth_Pursuit(Trial):
         self.target.move(x,y)
 
         if t >= self.test_duration_s:
-            print("test is done")
+            self.send_message("Smooth Pursuit rep finished")
             self.timer.stop()
             self.clean_graphics()
     
@@ -50,7 +58,7 @@ class Smooth_Pursuit(Trial):
         self.target.setVisible(True)
 
         self.start_time = time()
-        print("test is started")
+        self.send_message("Smooth Pursuit rep started")
 
         self.timer.start(16) 
 

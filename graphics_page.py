@@ -1,10 +1,8 @@
-from PySide6.QtWidgets import (QGraphicsView, QGraphicsScene)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QMainWindow, QMenuBar,
-    QSizePolicy, QStatusBar, QWidget)
-from PySide6.QtGui import QBrush
+from PySide6.QtWidgets import (QGraphicsView, QGraphicsScene, QGraphicsTextItem, QSizePolicy)
+from PySide6.QtGui import QBrush, QFont, QTextCursor, QTextBlockFormat
 from PySide6.QtCore import Qt, QTimer
 from functools import partial
-from Trial import Step_Prosaccade, Gap_Prosaccade, Overlap_Prosaccade, Smooth_Pursuit
+from Trial import Experiment
 from Trial.trajectories import (
     circle,
     figure8,
@@ -20,14 +18,18 @@ from numpy.random import randint
 from enum import Enum
 
 radius = 24
-centre = round(radius/2)
-SHIFT = 400
 
-class Direction(Enum):
-    LEFT = 1
-    RIGHT = 2
-    UP = 3
-    DOWN = 4
+# class Direction(Enum):
+#     LEFT = "Left"
+#     RIGHT = "Right"
+#     UP = "Up"
+#     DOWN = "Down"
+
+title_font = QFont("Arial", 32)
+title_font.setBold(True)
+
+instructions_font = QFont("Arial", 20)
+
 
 class Stimulus(QGraphicsEllipseItem):
     def __init__(self, color):
@@ -42,13 +44,6 @@ class Stimulus(QGraphicsEllipseItem):
     def move(self, x, y):
         self.setPos(x, y)
 
-    def hide(self):
-        self.hide()
-
-    def show(self):
-        self.show()
-
-
 class Graphics_Page(QGraphicsView):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -58,75 +53,62 @@ class Graphics_Page(QGraphicsView):
         self.centerOn(0, 0)
         self.setScene(self.graphics_scene)
 
-        self.step_prosaccade = Step_Prosaccade()
-        self.gap_prosaccade = Gap_Prosaccade()
-        self.overlap_prosaccade = Overlap_Prosaccade()
-        self.smooth_pursuit = Smooth_Pursuit(figure8)
-
-        self.fixation = Stimulus(Qt.GlobalColor.blue)
+        self.fixation = Stimulus(Qt.GlobalColor.yellow)
         self.target = Stimulus(Qt.GlobalColor.white)
+
+        self.title = QGraphicsTextItem("")
+        self.title.setFont(title_font)
+
+        self.instructions = QGraphicsTextItem("")
+        self.instructions.setFont(instructions_font)
+        self.instructions.setTextWidth(700)
+
         self.graphics_scene.addItem(self.fixation)
+        self.fixation.hide()
+
         self.graphics_scene.addItem(self.target)
-        self.directions = [Direction.LEFT, Direction.RIGHT, Direction.UP, Direction.DOWN]
+        self.target.hide()
+
+        self.graphics_scene.addItem(self.instructions)
+        self.graphics_scene.addItem(self.title)
 
         self.setSizePolicy(QSizePolicy.Policy.Expanding,QSizePolicy.Policy.Expanding)
-    
-    def move_dot(self):
-        self.fixation.move(randint(-500,500), randint(-500,500))
-        self.target.move(randint(-500,500), randint(-500,500))
-    
-    def step_prosaccade_run(self):
-        self.step_prosaccade.run(self.fixation, self.target)
-    
-    def gap_prosaccade_run(self):
-        self.gap_prosaccade.run(self.fixation, self.target)
+        
+    def show_title(self, text):
+        self.instructions.hide()
 
-    def overlap_prosaccade_run(self):
-        self.overlap_prosaccade.run(self.fixation, self.target)
+        self.title.setPlainText(text)
 
-    def smooth_pursuit_circle_run(self):
-        self.smooth_pursuit.set_trajectory(circle)
-        self.smooth_pursuit.run(self.fixation, self.target)
+        rect = self.title.boundingRect()
+        self.title.setPos(
+            -rect.width() / 2,
+            -rect.height() / 2
+        )
 
-    def smooth_pursuit_figure8_run(self):
-        self.smooth_pursuit.set_trajectory(figure8)
-        self.smooth_pursuit.run(self.fixation, self.target)
+        self.title.show()    
 
-    def smooth_pursuit_horizontal_run(self):
-        self.smooth_pursuit.set_trajectory(horizontal_sinusoid)
-        self.smooth_pursuit.run(self.fixation, self.target)
-    # def setup_prosaccade(self):
-    #     fixation_duration = randint(1000,1500)
-    #     print(fixation_duration)
-    #     target_duration = 1000
-    #     self.fixation.setVisible(True)
-    #     self.target.setVisible(False)
-    #     self.fixation.move(0, 0)
-    #     QTimer.singleShot(
-    #         fixation_duration, 
-    #         partial(
-    #             self.step_prosaccade, 
-    #             direction = self.directions[randint(0,4)]))
+    def show_instruction(self, text):
+        self.title.hide()
 
-    # def step_prosaccade(self, direction : Direction):
-    #     target_duration = 1000
-    #     self.fixation.setVisible(False)
-    #     QTimer.singleShot(target_duration, self.clean_graphics)
-    #     if (direction == Direction.LEFT):
-    #         self.target.move(-SHIFT,0)
-    #         self.target.setVisible(True)
-    #     if (direction == Direction.RIGHT):
-    #         self.target.move(SHIFT,0)
-    #         self.target.setVisible(True)
+        self.instructions.setPlainText(text)
 
-    #     if (direction == Direction.UP):
-    #         self.target.move(0,SHIFT)
-    #         self.target.setVisible(True)
+        cursor = self.instructions.textCursor()
+        block_format = QTextBlockFormat()
+        block_format.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-    #     if (direction == Direction.DOWN):
-    #         self.target.move(0,-SHIFT)
-    #         self.target.setVisible(True)
+        cursor.select(QTextCursor.SelectionType.Document)
+        cursor.mergeBlockFormat(block_format)
 
-    # def clean_graphics(self):
-    #     self.target.setVisible(False)
-    #     self.fixation.setVisible(False)
+        self.instructions.setTextCursor(cursor)
+
+        rect = self.instructions.boundingRect()
+        self.instructions.setPos(
+            -rect.width() / 2,
+            -rect.height() / 2
+        )
+
+        self.instructions.show()
+
+    def clear_text(self):
+        self.title.hide()
+        self.instructions.hide()
