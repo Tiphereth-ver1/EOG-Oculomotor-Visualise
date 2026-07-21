@@ -95,12 +95,12 @@ TRIALS = {
 }
 
 EXPERIMENT_SEQUENCE = [
-    "fixation",
-    "step_prosaccade",
-    "gap_prosaccade",
+    # "fixation",
+    # "step_prosaccade",
+    # "gap_prosaccade",
     "overlap_prosaccade",
-    "step_antisaccade",
-    "smooth_pursuit"
+    # "step_antisaccade",
+    # "smooth_pursuit"
 ]
 
 class Experiment(QObject):

@@ -25,10 +25,10 @@ radius = 24
 #     UP = "Up"
 #     DOWN = "Down"
 
-title_font = QFont("Arial", 32)
+title_font = QFont("Arial", 48)
 title_font.setBold(True)
 
-instructions_font = QFont("Arial", 20)
+instructions_font = QFont("Arial", 36)
 
 
 class Stimulus(QGraphicsEllipseItem):
