@@ -1,0 +1,8 @@
+- Blinking and head motion artefacts
+- Break timers in between testing
+- Sound signal to start (3,2 1 go)
+- Stop function during rest time (pause timer)
+- Automatic segmentation and processing
+- Spacebar alert (signal contamination button)
+- Reduce test size (60 -> 30, 40 -> 20)
+- Larger smooth pursuit range

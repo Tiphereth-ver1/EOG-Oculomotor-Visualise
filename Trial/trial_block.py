@@ -41,9 +41,9 @@ TRIALS = {
                         "look at the white dot when it appears. "
                         "The yellow dot will disappear before the white dot.",
         "params" : {
-            "fixation_min" : 1000,
-            "fixation_max" : 1500,
-            "gap" : 300,
+            "fixation_min" : 500,
+            "fixation_max" : 2000,
+            "gap" : 200,
             "target_duration" : 1000,
             "shift" : 400,
             "reps" : 60,
@@ -56,8 +56,8 @@ TRIALS = {
         "Description": "Focus on the yellow dot, and "
                         "look at the white dot when it appears. ",
         "params" : {
-            "fixation_min" : 1000,
-            "fixation_max" : 1500,
+            "fixation_min" : 500,
+            "fixation_max" : 2000,
             "target_duration" : 1000,
             "shift" : 400,
             "reps" : 60
@@ -71,8 +71,8 @@ TRIALS = {
                         "the white dot when it appears. "
                         "The yellow dot will not disappear.",
         "params" : {
-            "fixation_min" : 1000,
-            "fixation_max" : 1500,
+            "fixation_min" : 500,
+            "fixation_max" : 2000,
             "target_duration" : 1000,
             "shift" : 400,
             "reps" : 60
@@ -85,8 +85,8 @@ TRIALS = {
         "Description": "Focus on the yellow dot, and look in the opposite "
                         "direction to the white dot when it appears.",
         "params" : {
-            "fixation_min" : 1000,
-            "fixation_max" : 1500,
+            "fixation_min" : 500,
+            "fixation_max" : 2000,
             "target_duration" : 1000,
             "shift" : 400,
             "reps" : 40
@@ -95,12 +95,12 @@ TRIALS = {
 }
 
 EXPERIMENT_SEQUENCE = [
-    # "fixation",
-    # "step_prosaccade",
-    # "gap_prosaccade",
+    "fixation",
+    "step_prosaccade",
+    "gap_prosaccade",
     "overlap_prosaccade",
-    # "step_antisaccade",
-    # "smooth_pursuit"
+    "step_antisaccade",
+    "smooth_pursuit"
 ]
 
 class Experiment(QObject):
@@ -135,6 +135,8 @@ class Experiment(QObject):
             self.start_next_trial
         )
         self.logger_message.emit(f"{self.current_name} experiment completed.")
+        self.show_title.emit("Rest")
+    
     
     def relay_message(self, message : str):
         self.logger_message.emit(message)
