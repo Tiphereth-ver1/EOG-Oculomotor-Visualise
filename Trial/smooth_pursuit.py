@@ -45,6 +45,13 @@ class Smooth_Pursuit(Trial):
             self.send_message("Smooth Pursuit rep finished")
             self.timer.stop()
             self.clean_graphics()
+            self.event_generated.emit({
+                "parameters" : {
+                    "trial" : self.current_reps,
+                    "duration_ms" : self.test_duration_s * 1000
+                }
+            })
+
     
     def run(self, fixation : QGraphicsEllipseItem, target: QGraphicsEllipseItem):
         self.fixation = fixation

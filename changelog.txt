@@ -1,8 +1,8 @@
-- Blinking and head motion artefacts
-- Break timers in between testing
+- Blinking and head motion artefacts (DONE)
+- Break timers in between testing (DONE)
 - Sound signal to start (3,2 1 go)
-- Stop function during rest time (pause timer)
+- Stop function during rest time (pause timer) (DONE)
 - Automatic segmentation and processing
 - Spacebar alert (signal contamination button)
-- Reduce test size (60 -> 30, 40 -> 20)
-- Larger smooth pursuit range
+- Reduce test size (60 -> 30, 40 -> 20) (DONE)
+- Larger smooth pursuit range (DONE)

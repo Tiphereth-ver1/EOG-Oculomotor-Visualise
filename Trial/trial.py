@@ -17,6 +17,9 @@ DIRECTIONS = [Direction.LEFT, Direction.RIGHT, Direction.UP, Direction.DOWN]
 class Trial(QObject):
     finished = Signal()
     sent_message = Signal(str)
+    update_reps = Signal(int,int)
+    event_generated = Signal(dict)
+
     def __init__(self):
         super().__init__()
         self.reps = 3
@@ -24,8 +27,8 @@ class Trial(QObject):
         self.rest = 0
     
     def start(self, fixation : QGraphicsEllipseItem, target: QGraphicsEllipseItem):
-        self.current_reps = self.reps
-        self.run(fixation, target)
+        self.current_reps = 0
+        self.check_repeat(fixation, target)
         pass
     
     def run(self, fixation : QGraphicsEllipseItem, target: QGraphicsEllipseItem):
@@ -37,12 +40,16 @@ class Trial(QObject):
 
         
     def check_repeat(self, fixation : QGraphicsEllipseItem, target: QGraphicsEllipseItem):
-        if self.current_reps > 0:
-            print(f"Current rep: {self.current_reps}")
+        if self.current_reps < self.reps:
             self.run(fixation, target)
-            self.current_reps-=1
-        elif self.current_reps == 0:
+            self.current_reps += 1
+            print(f"Current rep: {self.current_reps}")
+            self.update_reps.emit(self.current_reps, self.reps)
+
+        elif self.current_reps == self.reps:
             self.finished.emit()
+            self.update_reps.emit(self.current_reps, self.reps)
+
             
             
 

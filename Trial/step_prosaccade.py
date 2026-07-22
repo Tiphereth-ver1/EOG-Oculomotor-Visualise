@@ -58,6 +58,12 @@ class Step_Prosaccade(Trial):
             target.setVisible(True)
         
         self.send_message(f"Duration: {self.fixation_duration}, Direction: {direction.value}")
+        self.event_generated.emit({
+            "parameters" : {
+                "trial" : self.current_reps,
+                "direction" : direction.value,
+                "duration_ms" : self.fixation_duration
+            }})
 
     def clean_graphics(self,
             fixation : QGraphicsEllipseItem, 

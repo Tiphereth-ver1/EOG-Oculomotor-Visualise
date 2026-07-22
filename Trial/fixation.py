@@ -29,6 +29,13 @@ class Fixation(Trial):
             self.send_message("Fixation rep finished")
             self.timer.stop()
             self.clean_graphics()
+            self.event_generated.emit({
+                "parameters" : {
+                    "trial" : self.current_reps,
+                    "duration_ms" : self.fixation_duration_s * 1000
+                }
+            })
+
     
     def run(self, fixation : QGraphicsEllipseItem, target: QGraphicsEllipseItem):
         self.fixation = fixation

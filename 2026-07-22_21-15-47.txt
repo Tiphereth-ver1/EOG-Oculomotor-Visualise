@@ -1,0 +1,9 @@
+[21:15:49.923] [+   2.112s] Experimental battery started.
+[21:15:59.981] [+  12.171s] Step Antisaccade experiment started.
+[21:16:01.825] [+  14.014s] Duration: 1843, Direction: down
+[21:16:04.146] [+  16.336s] Duration: 1321, Direction: down
+[21:16:06.460] [+  18.650s] Duration: 1302, Direction: up
+[21:16:08.822] [+  21.012s] Duration: 1348, Direction: down
+[21:16:11.587] [+  23.777s] Duration: 1747, Direction: left
+[21:16:13.676] [+  25.866s] Duration: 1073, Direction: down
+[21:16:15.944] [+  28.134s] Duration: 1262, Direction: up
