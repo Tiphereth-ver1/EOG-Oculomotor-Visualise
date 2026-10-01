@@ -17,7 +17,8 @@ TRIALS = {
         "params" : {
             "fixation_duration_s" : 1,
             "reps" : 4,
-            "rest" : 1000
+            "rest_duration_ms" : 2000,
+            "rest_duration_s" : 1
                 }
     },
 
@@ -27,11 +28,12 @@ TRIALS = {
         "Description": "Follow the white dot while it is on screen.",
         "params" : {
             "fz" : 0.2,
-            "test_duration_s" : 25,
+            "test_duration_s" : 3,
             "shift" : 600,
             "trajectory" : horizontal_sinusoid,
             "reps" : 4,
-            "rest" : 5000
+            "rest_duration_ms" : 5000,
+            "rest_duration_s" : 4
                 }
     },
     "gap_prosaccade" : {
@@ -96,20 +98,20 @@ TRIALS = {
 
 EXPERIMENT_SEQUENCE = [
     "fixation",
-    "step_prosaccade",
-    "step_prosaccade",
-    "gap_prosaccade",
-    "gap_prosaccade",
-    "overlap_prosaccade",
-    "overlap_prosaccade",
-    "step_antisaccade",
-    "step_antisaccade",
+    # "step_prosaccade",
+    # "step_prosaccade",
+    # "gap_prosaccade",
+    # "gap_prosaccade",
+    # "overlap_prosaccade",
+    # "overlap_prosaccade",
+    # "step_antisaccade",
+    # "step_antisaccade",
     "smooth_pursuit"
 ]
 
 class Experiment(QObject):
     event_sent = Signal(dict)
-    logger_message = Signal(str)
+    logger_message = Signal(str, str)
     show_title = Signal(str)
     show_instruction = Signal(str)
     updating_reps = Signal(int, int)
@@ -126,6 +128,8 @@ class Experiment(QObject):
         self.countdown = True
         self.rest_timer = QTimer()
         self.rest_timer.timeout.connect(self.update_rest)
+        self.inter_rest_timer = QTimer()
+        self.inter_rest_timer.timeout.connect(self.update_inter_rest)
         self.test_timer = QTimer()
         self.test_timer.timeout.connect(self.update_test)
 
@@ -138,6 +142,7 @@ class Experiment(QObject):
             trial.sent_message.connect(self.relay_message)
             trial.update_reps.connect(self.update_reps)
             trial.event_generated.connect(self.event_received)
+            trial.display_rest_timer.connect(self.inter_rest_display)
     
     def start(self, fixation, target):
         self.fixation = fixation
@@ -151,24 +156,29 @@ class Experiment(QObject):
 
         # Experiment complete
         if self.current_trial >= len(self.trials):
-            self.logger_message.emit("Experimental battery complete.")
+            self.logger_message.emit("Experimental battery complete.", "NULL")
             self.updating_exp.emit("Complete")
             self.updating_reps.emit(0, 0)
             self.show_title.emit("Complete")
             self.experiment_complete.emit()
             return
 
-
-        self.rest_remaining = 30
-
+        self.enable_pause.emit()
+        self.logger_message.emit(f"{self.current_name} experiment completed.", "NULL")
+        self.rest_display(30)
+    
+    def rest_display(self, timer):
+        self.rest_remaining = timer
         self.updating_exp.emit("Rest")
         self.updating_reps.emit(0,0)
         self.show_title.emit(str(self.rest_remaining))
-        self.logger_message.emit(f"{self.current_name} experiment completed.")
-        self.enable_pause.emit()
-
         self.rest_timer.start(1000)    
-    
+
+    def inter_rest_display(self, timer):
+        self.rest_remaining = timer
+        self.show_title.emit(str(self.rest_remaining))
+        self.inter_rest_timer.start(1000)    
+
 
     def on_instructions_finished(self):
         self.rest_remaining = 3
@@ -180,8 +190,8 @@ class Experiment(QObject):
         self.test_timer.start(1000)    
 
     
-    def relay_message(self, message : str):
-        self.logger_message.emit(message)
+    def relay_message(self, message : str, time : str):
+        self.logger_message.emit(message, time)
         print("pinged")
         pass
 
@@ -222,7 +232,7 @@ class Experiment(QObject):
     def begin_trial(self):
         self.clear_text.emit()
         trial = self.trials[self.current_trial]
-        self.logger_message.emit(f"{self.current_name} experiment started.")
+        self.logger_message.emit(f"{self.current_name} experiment started.", "NULL")
         self.updating_exp.emit(self.current_name)
         trial.start(self.fixation, self.target)
         self.disable_pause.emit()
@@ -230,12 +240,29 @@ class Experiment(QObject):
     def update_rest(self):
         if self.countdown == True:
             self.rest_remaining -= 1
-
-        self.show_title.emit(str(self.rest_remaining))
-
+        
         if self.rest_remaining == 0:
             self.rest_timer.stop()
             self.start_next_trial()
+
+
+        self.show_title.emit(str(self.rest_remaining))
+
+    
+    def update_inter_rest(self):
+        if self.countdown == True:
+            self.rest_remaining -= 1
+        
+        self.show_title.emit(str(self.rest_remaining))
+
+        if self.rest_remaining == 0:
+            self.inter_rest_timer.stop()
+            print("Eliminate all text")
+            self.clear_text.emit()
+        
+
+
+
 
     def update_test(self):
         if self.countdown == True:

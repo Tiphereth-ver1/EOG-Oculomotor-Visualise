@@ -18,7 +18,8 @@ class Smooth_Pursuit(Trial):
         shift,
         trajectory,
         reps,
-        rest
+        rest_duration_ms,
+        rest_duration_s,
     ):
         super().__init__() 
         self.fz = fz
@@ -26,7 +27,8 @@ class Smooth_Pursuit(Trial):
         self.shift = shift
         self.trajectory = trajectory
         self.reps = reps
-        self.rest = rest
+        self.rest_duration_ms = rest_duration_ms
+        self.rest_duration_s = rest_duration_s
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_position)
@@ -73,4 +75,5 @@ class Smooth_Pursuit(Trial):
     def clean_graphics(self):
         self.target.setVisible(False)
         self.fixation.setVisible(False)
-        QTimer.singleShot(self.rest, partial(self.check_repeat, self.fixation, self.target))
+        self.display_rest(self.rest_duration_s)
+        QTimer.singleShot(self.rest_duration_ms, partial(self.check_repeat, self.fixation, self.target))

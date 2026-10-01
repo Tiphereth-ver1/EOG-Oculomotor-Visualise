@@ -10,13 +10,15 @@ class Fixation(Trial):
         self,
         fixation_duration_s,
         reps,
-        rest
+        rest_duration_ms,
+        rest_duration_s,
     ):
         super().__init__()
 
         self.fixation_duration_s = fixation_duration_s
         self.reps = reps
-        self.rest = rest
+        self.rest_duration_ms = rest_duration_ms
+        self.rest_duration_s = rest_duration_s
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.check_time)
@@ -54,4 +56,6 @@ class Fixation(Trial):
     def clean_graphics(self):
         self.target.setVisible(False)
         self.fixation.setVisible(False)
-        QTimer.singleShot(self.rest, partial(self.check_repeat, self.fixation, self.target))
+        self.display_rest(self.rest_duration_s)
+
+        QTimer.singleShot(self.rest_duration_ms, partial(self.check_repeat, self.fixation, self.target))

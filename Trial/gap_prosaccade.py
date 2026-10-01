@@ -28,11 +28,21 @@ class Gap_Prosaccade(Trial):
         fixation.move(0, 0)
         fixation.setVisible(True)
         target.setVisible(False)
+        direction_choose = DIRECTIONS[randint(0,4)]
+        self.send_message(f"Duration: {self.fixation_duration}, Direction: {direction_choose}")
+        self.event_generated.emit({
+            "parameters" : {
+                "trial" : self.current_reps,
+                "direction" : direction_choose,
+                "duration_ms" : self.fixation_duration
+            }
+        })
+
         QTimer.singleShot(
             self.fixation_duration, 
             partial(
                 self.begin_gap, 
-                direction = DIRECTIONS[randint(0,4)],
+                direction = directions_choose,
                 fixation = fixation,
                 target = target))
     
@@ -68,16 +78,6 @@ class Gap_Prosaccade(Trial):
         if (direction == Direction.DOWN):
             target.move(0,self.shift)
             target.setVisible(True)
-
-        self.send_message(f"Duration: {self.fixation_duration}, Direction: {direction.value}")
-        self.event_generated.emit({
-            "parameters" : {
-                "trial" : self.current_reps,
-                "direction" : direction.value,
-                "duration_ms" : self.fixation_duration
-            }
-        })
-
     
     def clean_graphics(self,
             fixation : QGraphicsEllipseItem, 

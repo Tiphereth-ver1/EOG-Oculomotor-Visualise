@@ -39,23 +39,27 @@ class Data_Logger:
         self.main_data["events"].append(event)
 
     def save(self):
-        print()
-        with open(f"{self.subject_id}.json", "w") as f:
+        timestamp = self.main_data["session"]["start_time"]
+        timestamp = timestamp.replace(":", "-")
+
+        with open(f"({self.subject_id}) - {timestamp}.json", "w") as f:
             json.dump(
                 self.main_data,
                 f,
                 indent=4
             )
     
-    def write_message(self, msg: str):
+    def write_message(self, msg: str, time : str):
         now = datetime.now()
         elapsed = now - self.start
 
         timestamp = now.strftime("%H:%M:%S.%f")[:-3]  # HH:MM:SS.mmm
         elapsed_s = elapsed.total_seconds()
 
+
+
         self.file.write(
-            f"[{timestamp}] [+{elapsed_s:8.3f}s] {msg}\n"
+            f"Formerly [{time}] [{timestamp}] [+{elapsed_s:8.3f}s] {msg}\n"
         )
         self.file.flush()
 

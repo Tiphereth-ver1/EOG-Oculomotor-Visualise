@@ -1,7 +1,7 @@
 import sys
 from PySide6.QtWidgets import QMainWindow
 from PySide6.QtWidgets import (QApplication, QHBoxLayout, QFormLayout, QMainWindow, QMenuBar,
-    QSizePolicy, QStatusBar, QWidget)
+    QSizePolicy, QStatusBar, QWidget, QToolBar)
 from PySide6.QtGui import QBrush, QFont
 from PySide6.QtCore import Qt, QThread, Signal
 from PySide6.QtWidgets import (
@@ -18,6 +18,7 @@ from Trial import Experiment
 from graphics_page import Graphics_Page
 from data_logger import Data_Logger
 from Connection import Serial_Worker
+from datetime import datetime
 
 class MainWindow(QMainWindow):
     connection_request = Signal()
@@ -49,6 +50,25 @@ class MainWindow(QMainWindow):
         self.experiment.disable_pause.connect(self.diable_pause)
         self.experiment.event_sent.connect(self.logger.add_event)
         self.experiment.experiment_complete.connect(self.logger.save)
+        self.experiment.experiment_complete.connect(self.enable_expt)
+
+        self.bottom_bar = QToolBar()
+        self.bottom_bar.setMovable(False)
+        self.bottom_bar.setFloatable(False)
+
+        left_spacer = QWidget()
+        left_spacer.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+        self.bottom_bar.addWidget(left_spacer)
+
+        self.sidebar_toggle = QPushButton("Toggle Sidebar")
+        self.sidebar_toggle.clicked.connect(self.toggle_sidebar)
+        self.bottom_bar.addWidget(self.sidebar_toggle)
+
+        right_spacer = QWidget()
+        right_spacer.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+        self.bottom_bar.addWidget(right_spacer)
+
+        self.addToolBar(Qt.BottomToolBarArea, self.bottom_bar)
 
         self.resize(1400, 800)
 
@@ -63,7 +83,7 @@ class MainWindow(QMainWindow):
 
 
         # Buttons
-        expt_btn = QPushButton("Experiment")
+        self.expt_btn = QPushButton("Experiment")
         self.countdown_btn = QPushButton("Pause")
         self.countdown_btn.setEnabled(False)
         connect_btn = QPushButton("Connect")
@@ -73,7 +93,7 @@ class MainWindow(QMainWindow):
 
         self.make_info_box()
 
-        layout.addWidget(expt_btn)
+        layout.addWidget(self.expt_btn)
         layout.addWidget(self.countdown_btn)
         layout.addWidget(self.info)
         layout.addStretch()
@@ -84,8 +104,8 @@ class MainWindow(QMainWindow):
         self.status_box.setFixedWidth(150)
 
         # Connect signals
-        expt_btn.clicked.connect(self.expt_start)
-        expt_btn.clicked.connect(self.logger.init_main_data)
+        self.expt_btn.clicked.connect(self.expt_start)
+        self.expt_btn.clicked.connect(self.logger.init_main_data)
         self.countdown_btn.clicked.connect(self.countdowner)
         status_btn.clicked.connect(self.toggle_status)
         connect_btn.clicked.connect(self.connection_request.emit)
@@ -93,6 +113,9 @@ class MainWindow(QMainWindow):
 
         self.dock.setWidget(container)
         self.addDockWidget(Qt.LeftDockWidgetArea, self.dock)
+
+    def toggle_sidebar(self):
+        self.dock.setVisible(not self.dock.isVisible())
     
     def enable_pause(self):
         self.countdown_btn.setEnabled(True)
@@ -107,6 +130,8 @@ class MainWindow(QMainWindow):
         else:
             self.countdown_btn.setText("Resume")
 
+    def enable_expt(self):
+        self.expt_btn.setEnabled(True)
 
     def make_info_box(self):
         font1 = QFont("Arial", 16)
@@ -140,7 +165,8 @@ class MainWindow(QMainWindow):
         
 
     def expt_start(self):
-        self.logger.write_message("Experimental battery started.")
+        self.expt_btn.setEnabled(False)
+        self.logger.write_message("Experimental battery started.", self.get_time())
         self.experiment.start(self.graphics.fixation, self.graphics.target)
     
     def toggle_status(self):
@@ -157,10 +183,13 @@ class MainWindow(QMainWindow):
         self.current_experiment.setText(experiment)
 
 
+    def get_time(self):
+        return datetime.now().isoformat(timespec="milliseconds")
+
     def keyPressEvent(self, event):
 
         if event.key() == Qt.Key_E:
-            self.logger.write_message("Motion artefact detected.")
+            self.logger.write_message("Motion artefact detected.", self.get_time())
             self.logger.add_event({
                 "type" : "ARTEFACT"
             })
