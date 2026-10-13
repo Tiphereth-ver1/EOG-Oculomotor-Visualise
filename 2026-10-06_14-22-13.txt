@@ -1,0 +1,11 @@
+Formerly [2026-10-06T14:22:18.657] [14:22:18.657] [+   5.435s] Experimental battery started.
+Formerly [NULL] [14:22:28.755] [+  15.533s] Fixation experiment started.
+Formerly [2026-10-06T14:22:28.756] [14:22:28.756] [+  15.534s] Fixation rep started
+Formerly [2026-10-06T14:22:30.752] [14:22:30.752] [+  17.531s] Fixation rep finished
+Formerly [2026-10-06T14:22:32.747] [14:22:32.747] [+  19.526s] Fixation rep started
+Formerly [2026-10-06T14:22:34.754] [14:22:34.754] [+  21.533s] Fixation rep finished
+Formerly [2026-10-06T14:22:36.753] [14:22:36.753] [+  23.531s] Fixation rep started
+Formerly [2026-10-06T14:22:38.757] [14:22:38.757] [+  25.535s] Fixation rep finished
+Formerly [2026-10-06T14:22:40.756] [14:22:40.756] [+  27.534s] Fixation rep started
+Formerly [2026-10-06T14:22:41.759] [14:22:41.759] [+  28.537s] Fixation rep finished
+Formerly [NULL] [14:22:43.753] [+  30.531s] Fixation experiment completed.
