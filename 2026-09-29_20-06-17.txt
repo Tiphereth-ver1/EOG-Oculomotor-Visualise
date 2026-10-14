@@ -1,0 +1,68 @@
+[20:06:22.082] [+   4.662s] Experimental battery started.
+[20:06:32.086] [+  14.667s] Fixation experiment started.
+[20:06:32.087] [+  14.668s] Fixation rep started
+[20:06:34.082] [+  16.663s] Fixation rep finished
+[20:06:35.094] [+  17.675s] Fixation rep started
+[20:06:36.093] [+  18.674s] Fixation rep finished
+[20:06:37.091] [+  19.672s] Fixation rep started
+[20:06:38.092] [+  20.672s] Fixation rep finished
+[20:06:39.081] [+  21.661s] Fixation rep started
+[20:06:40.088] [+  22.668s] Fixation rep finished
+[20:06:41.086] [+  23.666s] Fixation experiment completed.
+[20:07:24.083] [+  66.663s] Step Prosaccade experiment started.
+[20:07:25.754] [+  68.335s] Duration: 1650, Direction: right
+[20:07:28.367] [+  70.948s] Duration: 1609, Direction: up
+[20:07:30.661] [+  73.242s] Duration: 1294, Direction: left
+[20:07:33.209] [+  75.789s] Duration: 1531, Direction: down
+[20:07:35.526] [+  78.107s] Duration: 1299, Direction: left
+[20:07:37.588] [+  80.168s] Duration: 1050, Direction: down
+[20:07:39.174] [+  81.755s] Duration: 585, Direction: right
+[20:07:41.282] [+  83.863s] Duration: 1068, Direction: down
+[20:07:43.076] [+  85.656s] Duration: 797, Direction: down
+[20:07:46.004] [+  88.585s] Duration: 1930, Direction: down
+[20:07:48.610] [+  91.190s] Duration: 1585, Direction: left
+[20:07:51.257] [+  93.838s] Duration: 1655, Direction: up
+[20:07:53.893] [+  96.473s] Duration: 1616, Direction: down
+[20:07:55.867] [+  98.448s] Duration: 981, Direction: right
+[20:07:58.190] [+ 100.771s] Duration: 1303, Direction: down
+[20:08:00.292] [+ 102.872s] Duration: 1108, Direction: up
+[20:08:02.941] [+ 105.521s] Duration: 1634, Direction: right
+[20:08:04.549] [+ 107.130s] Duration: 621, Direction: down
+[20:08:06.778] [+ 109.359s] Duration: 1208, Direction: left
+[20:08:08.963] [+ 111.544s] Duration: 1183, Direction: up
+[20:08:10.883] [+ 113.463s] Duration: 911, Direction: up
+[20:08:13.158] [+ 115.739s] Duration: 1255, Direction: right
+[20:08:14.814] [+ 117.394s] Duration: 653, Direction: right
+[20:08:16.520] [+ 119.101s] Duration: 708, Direction: right
+[20:08:19.292] [+ 121.872s] Duration: 1751, Direction: up
+[20:08:21.067] [+ 123.648s] Duration: 775, Direction: down
+[20:08:23.207] [+ 125.788s] Duration: 1117, Direction: up
+[20:08:25.914] [+ 128.495s] Duration: 1719, Direction: left
+[20:08:28.790] [+ 131.371s] Duration: 1861, Direction: up
+[20:08:31.220] [+ 133.800s] Duration: 1408, Direction: up
+[20:08:32.216] [+ 134.796s] Step Prosaccade experiment completed.
+[20:09:12.228] [+ 174.809s] Step Prosaccade experiment started.
+[20:09:12.793] [+ 175.373s] Duration: 560, Direction: left
+[20:09:15.303] [+ 177.883s] Duration: 1510, Direction: up
+[20:09:18.058] [+ 180.639s] Duration: 1742, Direction: left
+[20:09:19.732] [+ 182.312s] Duration: 667, Direction: left
+[20:09:21.270] [+ 183.850s] Duration: 537, Direction: left
+[20:09:23.997] [+ 186.578s] Duration: 1707, Direction: up
+[20:09:26.266] [+ 188.847s] Duration: 1263, Direction: down
+[20:09:29.130] [+ 191.710s] Duration: 1871, Direction: up
+[20:09:31.174] [+ 193.755s] Duration: 1023, Direction: down
+[20:09:33.030] [+ 195.611s] Duration: 858, Direction: left
+[20:09:35.634] [+ 198.214s] Duration: 1605, Direction: left
+[20:09:38.225] [+ 200.806s] Duration: 1588, Direction: down
+[20:09:41.101] [+ 203.681s] Duration: 1864, Direction: right
+[20:09:43.888] [+ 206.468s] Duration: 1772, Direction: left
+[20:09:45.707] [+ 208.288s] Duration: 808, Direction: down
+[20:09:48.142] [+ 210.723s] Duration: 1407, Direction: right
+[20:09:50.758] [+ 213.339s] Duration: 1612, Direction: right
+[20:09:52.769] [+ 215.349s] Duration: 998, Direction: left
+[20:09:55.708] [+ 218.288s] Duration: 1935, Direction: up
+[20:09:57.672] [+ 220.252s] Duration: 944, Direction: right
+[20:10:00.325] [+ 222.905s] Duration: 1642, Direction: up
+[20:10:03.160] [+ 225.741s] Duration: 1840, Direction: down
+[20:10:05.042] [+ 227.622s] Duration: 868, Direction: down
+[20:10:07.250] [+ 229.830s] Duration: 1200, Direction: left

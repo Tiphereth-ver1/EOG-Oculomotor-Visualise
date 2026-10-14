@@ -1,32 +1,18 @@
-import sys
 from PySide6.QtWidgets import QMainWindow
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QFormLayout, QMainWindow, QMenuBar,
-    QSizePolicy, QStatusBar, QWidget, QToolBar)
-from PySide6.QtGui import QBrush, QFont
 from PySide6.QtCore import Qt, QThread, Signal
-from PySide6.QtWidgets import (
-    QMainWindow,
-    QDockWidget,
-    QWidget,
-    QVBoxLayout,
-    QPushButton,
-    QTextEdit,
-    QLabel
-)
 
 from Trial import Experiment
-from graphics_page import Graphics_Page
+from ui_mainwindow import Ui_MainWindow
 from data_logger import Data_Logger
 from Connection import Serial_Worker
-from datetime import datetime
 
 class MainWindow(QMainWindow):
     connection_request = Signal()
     def __init__(self):
         super().__init__()
 
-        self.graphics = Graphics_Page()
-        self.setCentralWidget(self.graphics)
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
         self.experiment : Experiment = Experiment()
         self.logger : Data_Logger = Data_Logger()
         self.conn = Serial_Worker()
@@ -48,74 +34,21 @@ class MainWindow(QMainWindow):
         self.experiment.updating_reps.connect(self.update_rep_status)
         self.experiment.enable_pause.connect(self.enable_pause)
         self.experiment.disable_pause.connect(self.diable_pause)
-        self.experiment.event_sent.connect(self.logger.add_event)
+        self.experiment.event_sent.connect(self.logger.add_event)  # 《《《《《《《《《《《转发事件字典；日志器当前将整个字典存入type字段
         self.experiment.experiment_complete.connect(self.logger.save)
-        self.experiment.experiment_complete.connect(self.enable_expt)
-
-        self.bottom_bar = QToolBar()
-        self.bottom_bar.setMovable(False)
-        self.bottom_bar.setFloatable(False)
-
-        left_spacer = QWidget()
-        left_spacer.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
-        self.bottom_bar.addWidget(left_spacer)
-
-        self.sidebar_toggle = QPushButton("Toggle Sidebar")
-        self.sidebar_toggle.clicked.connect(self.toggle_sidebar)
-        self.bottom_bar.addWidget(self.sidebar_toggle)
-
-        right_spacer = QWidget()
-        right_spacer.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
-        self.bottom_bar.addWidget(right_spacer)
-
-        self.addToolBar(Qt.BottomToolBarArea, self.bottom_bar)
-
-        self.resize(1400, 800)
 
         self.setup_sidebar()
 
     def setup_sidebar(self):
-        self.dock = QDockWidget("Experiments", self)
-        self.dock.setFeatures(QDockWidget.DockWidgetMovable)
-
-        container = QWidget()
-        layout = QVBoxLayout(container)
-
-
-        # Buttons
-        self.expt_btn = QPushButton("Experiment")
-        self.countdown_btn = QPushButton("Pause")
-        self.countdown_btn.setEnabled(False)
-        connect_btn = QPushButton("Connect")
-        status_btn = QPushButton("Debug")
-        self.status_box = QTextEdit()
-        self.status_box.setReadOnly(True)
-
-        self.make_info_box()
-
-        layout.addWidget(self.expt_btn)
-        layout.addWidget(self.countdown_btn)
-        layout.addWidget(self.info)
-        layout.addStretch()
-        layout.addWidget(connect_btn)
-        layout.addWidget(status_btn)
-        layout.addWidget(self.status_box)
-        self.status_box.hide()
-        self.status_box.setFixedWidth(150)
+        # Initial visibility and signal wiring belong to the controller.
+        self.status_box.hide()  # 《《《《《《《《《《《Debug日志框初始隐藏
 
         # Connect signals
-        self.expt_btn.clicked.connect(self.expt_start)
-        self.expt_btn.clicked.connect(self.logger.init_main_data)
-        self.countdown_btn.clicked.connect(self.countdowner)
-        status_btn.clicked.connect(self.toggle_status)
-        connect_btn.clicked.connect(self.connection_request.emit)
-
-
-        self.dock.setWidget(container)
-        self.addDockWidget(Qt.LeftDockWidgetArea, self.dock)
-
-    def toggle_sidebar(self):
-        self.dock.setVisible(not self.dock.isVisible())
+        self.expt_btn.clicked.connect(self.expt_start)  # 《《《《《《《《《《《Experiment按钮启动实验调度
+        self.expt_btn.clicked.connect(self.logger.init_main_data)  # 《《《《《《《《《《《同一次点击初始化会话记录；连接顺序在启动实验槽位之后
+        self.countdown_btn.clicked.connect(self.countdowner)  # 《《《《《《《《《《《Pause按钮切换倒计时，不中断刺激任务
+        self.status_btn.clicked.connect(self.toggle_status)
+        self.connect_btn.clicked.connect(self.connection_request.emit)
     
     def enable_pause(self):
         self.countdown_btn.setEnabled(True)
@@ -126,55 +59,21 @@ class MainWindow(QMainWindow):
     def countdowner(self):
         self.experiment.countdown = not self.experiment.countdown
         if self.experiment.countdown:
-            self.countdown_btn.setText("Pause")
+            self.countdown_btn.setText("Pause")  # 《《《《《《《《《《《倒计时运行时按钮文字
         else:
-            self.countdown_btn.setText("Resume")
+            self.countdown_btn.setText("Resume")  # 《《《《《《《《《《《倒计时暂停时按钮文字
 
-    def enable_expt(self):
-        self.expt_btn.setEnabled(True)
-
-    def make_info_box(self):
-        font1 = QFont("Arial", 16)
-        font = QFont("Arial", 20)
-        font.setBold(True)
-
-        self.info = QWidget()
-        layout = QVBoxLayout(self.info)
-        self.info.setStyleSheet("""
-            QWidget {
-                background-color: grey;
-                border: 1px solid white;
-                border-radius: 1px;
-            }
-            """)
-
-
-        self.info.setFixedWidth(150)
-
-        self.current_experiment = QLabel("None")
-        self.current_experiment.setFont(font1)
-        self.current_experiment.setAlignment(Qt.AlignCenter)
-        self.current_experiment.setWordWrap(True)
-
-        self.reps_count = QLabel("0/0")
-        self.reps_count.setFont(font)
-        self.reps_count.setAlignment(Qt.AlignCenter)
-
-        layout.addWidget(self.current_experiment)
-        layout.addWidget(self.reps_count)
-        
 
     def expt_start(self):
-        self.expt_btn.setEnabled(False)
-        self.logger.write_message("Experimental battery started.", self.get_time())
-        self.experiment.start(self.graphics.fixation, self.graphics.target)
+        self.logger.write_message("Experimental battery started.")
+        self.experiment.start(self.graphics.fixation, self.graphics.target)  # 《《《《《《《《《《《将两个圆点交给实验调度器，从首块开始
     
     def toggle_status(self):
         self.status = not self.status
         if self.status:
             self.status_box.show()
         if not self.status:
-            self.status_box.hide()
+            self.status_box.hide()  # 《《《《《《《《《《《Debug日志框初始隐藏
     
     def update_rep_status(self, current : int, total: int):
         self.reps_count.setText(f"{current}/{total}")
@@ -183,13 +82,10 @@ class MainWindow(QMainWindow):
         self.current_experiment.setText(experiment)
 
 
-    def get_time(self):
-        return datetime.now().isoformat(timespec="milliseconds")
-
     def keyPressEvent(self, event):
 
-        if event.key() == Qt.Key_E:
-            self.logger.write_message("Motion artefact detected.", self.get_time())
+        if event.key() == Qt.Key_E:  # 《《《《《《《《《《《按E标记运动伪迹，可在此修改快捷键
+            self.logger.write_message("Motion artefact detected.")
             self.logger.add_event({
                 "type" : "ARTEFACT"
             })

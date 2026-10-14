@@ -10,15 +10,13 @@ class Fixation(Trial):
         self,
         fixation_duration_s,
         reps,
-        rest_duration_ms,
-        rest_duration_s,
+        rest
     ):
         super().__init__()
 
         self.fixation_duration_s = fixation_duration_s
         self.reps = reps
-        self.rest_duration_ms = rest_duration_ms
-        self.rest_duration_s = rest_duration_s
+        self.rest = rest
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.check_time)
@@ -44,18 +42,16 @@ class Fixation(Trial):
         self.target = target
 
         self.fixation.setVisible(False)
-        self.target.move(0,0)
+        self.target.move(0,0)  # 《《《《《《《《《《《注视任务使用targetColor目标点并放在中心，不使用黄色fixation点
         self.target.setVisible(True)
 
         self.start_time = time()
         self.send_message("Fixation rep started")
 
-        self.timer.start(1000) 
+        self.timer.start(1000)  # 《《《《《《《《《《《注视每1000毫秒检查结束，小数秒时长会受此间隔影响
 
 
     def clean_graphics(self):
         self.target.setVisible(False)
         self.fixation.setVisible(False)
-        self.display_rest(self.rest_duration_s)
-
-        QTimer.singleShot(self.rest_duration_ms, partial(self.check_repeat, self.fixation, self.target))
+        QTimer.singleShot(self.rest, partial(self.check_repeat, self.fixation, self.target))  # 《《《《《《《《《《《重复后等待rest毫秒，包括最后一次，再检查是否完成

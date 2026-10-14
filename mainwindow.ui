@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <!-- 《《《《《《《《《《《主窗口初始尺寸，下方width=1400、height=800 -->
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1400</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <!-- 《《《《《《《《《《《窗口或侧栏标题文字 -->
+  <property name="windowTitle">
+   <string>EOG Oculomotor Visualise</string>
+  </property>
+  <widget class="Graphics_Page" name="graphics">
+   <!-- 《《《《《《《《《《《画布随布局空间伸缩，控件尺寸还受最小最大尺寸约束 -->
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <!-- 《《《《《《《《《《《场景范围(-600,-350,1200,700)，不改变轨迹；纵向shift=400超出此初始范围 -->
+   <property name="sceneRect">
+    <rectf>
+     <x>-600.000000000000000</x>
+     <y>-350.000000000000000</y>
+     <width>1200.000000000000000</width>
+     <height>700.000000000000000</height>
+    </rectf>
+   </property>
+   <!-- 《《《《《《《《《《《画布背景RGB颜色，当前黑色，alpha=255不透明 -->
+   <property name="backgroundBrush">
+    <brush brushstyle="SolidPattern">
+     <color alpha="255">
+      <red>0</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </brush>
+   </property>
+   <!-- 《《《《《《《《《《《两个圆点共用直径24，各实验共用此值，单位场景坐标 -->
+   <property name="stimulusDiameter" stdset="0">
+    <double>24.000000000000000</double>
+   </property>
+   <!-- 《《《《《《《《《《《扫视中心点RGB颜色，当前黄色 -->
+   <property name="fixationColor" stdset="0">
+    <color alpha="255">
+     <red>255</red>
+     <green>255</green>
+     <blue>0</blue>
+    </color>
+   </property>
+   <!-- 《《《《《《《《《《《外围目标、注视任务及追踪圆点RGB颜色，当前白色 -->
+   <property name="targetColor" stdset="0">
+    <color alpha="255">
+     <red>255</red>
+     <green>255</green>
+     <blue>255</blue>
+    </color>
+   </property>
+   <!-- 《《《《《《《《《《《中央标题和倒计时字体，Arial 48磅粗体 -->
+   <property name="titleFont" stdset="0">
+    <font>
+     <family>Arial</family>
+     <pointsize>48</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <!-- 《《《《《《《《《《《场景文字换算DPI=100，影响实际字体大小 -->
+   <property name="sceneTextDpi" stdset="0">
+    <number>100</number>
+   </property>
+   <!-- 《《《《《《《《《《《标题和倒计时RGB颜色，当前白色 -->
+   <property name="titleColor" stdset="0">
+    <color alpha="255">
+     <red>255</red>
+     <green>255</green>
+     <blue>255</blue>
+    </color>
+   </property>
+   <!-- 《《《《《《《《《《《中央提示语字体，Arial 36磅 -->
+   <property name="instructionsFont" stdset="0">
+    <font>
+     <family>Arial</family>
+     <pointsize>36</pointsize>
+    </font>
+   </property>
+   <!-- 《《《《《《《《《《《中央提示语RGB颜色，当前白色 -->
+   <property name="instructionsColor" stdset="0">
+    <color alpha="255">
+     <red>255</red>
+     <green>255</green>
+     <blue>255</blue>
+    </color>
+   </property>
+   <!-- 《《《《《《《《《《《提示语换行宽度700，位置在graphics_page.py计算 -->
+   <property name="instructionsWidth" stdset="0">
+    <double>700.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QDockWidget" name="dock">
+   <!-- 《《《《《《《《《《《侧栏停靠面板可移动设置 -->
+   <property name="features">
+    <set>QDockWidget::DockWidgetMovable</set>
+   </property>
+   <!-- 《《《《《《《《《《《窗口或侧栏标题文字 -->
+   <property name="windowTitle">
+    <string>Experiments</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="sidebar_container">
+    <!-- 《《《《《《《《《《《侧栏排列入口，item顺序决定上下位置，可添加spacing和边距调整间距 -->
+    <layout class="QVBoxLayout" name="sidebar_layout" stretch="0,0,0,0,0,0,0">
+     <item>
+      <widget class="QPushButton" name="expt_btn">
+       <!-- 《《《《《《《《《《《控件初始文字，运行时状态和按钮文字可能被控制器更新 -->
+       <property name="text">
+        <string>Experiment</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="countdown_btn">
+       <!-- 《《《《《《《《《《《Pause初始禁用，块间休息时由控制器启用 -->
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <!-- 《《《《《《《《《《《控件初始文字，运行时状态和按钮文字可能被控制器更新 -->
+       <property name="text">
+        <string>Pause</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QWidget" name="info" native="true">
+       <!-- 《《《《《《《《《《《控件最小尺寸；固定宽150时修改宽度须同步改maximumSize -->
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>0</height>
+        </size>
+       </property>
+       <!-- 《《《《《《《《《《《控件最大尺寸；固定宽150时修改宽度须同步改minimumSize -->
+       <property name="maximumSize">
+        <size>
+         <width>150</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <!-- 《《《《《《《《《《《信息框样式，grey背景、white边框，可改background-color、color、border -->
+       <property name="styleSheet">
+        <string notr="true">QWidget {
+                background-color: grey;
+                border: 1px solid white;
+                border-radius: 1px;
+            }</string>
+       </property>
+       <layout class="QVBoxLayout" name="info_layout">
+        <item>
+         <widget class="QLabel" name="current_experiment">
+          <!-- 《《《《《《《《《《《侧栏标签字体字号，修改family、pointsize和bold -->
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>16</pointsize>
+           </font>
+          </property>
+          <!-- 《《《《《《《《《《《控件初始文字，运行时状态和按钮文字可能被控制器更新 -->
+          <property name="text">
+           <string>None</string>
+          </property>
+          <!-- 《《《《《《《《《《《侧栏文字对齐方式，当前居中 -->
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <!-- 《《《《《《《《《《《侧栏实验名称自动换行开关 -->
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="reps_count">
+          <!-- 《《《《《《《《《《《侧栏标签字体字号，修改family、pointsize和bold -->
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>20</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <!-- 《《《《《《《《《《《控件初始文字，运行时状态和按钮文字可能被控制器更新 -->
+          <property name="text">
+           <string>0/0</string>
+          </property>
+          <!-- 《《《《《《《《《《《侧栏文字对齐方式，当前居中 -->
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <spacer name="sidebar_spacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <!-- 《《《《《《《《《《《伸缩空白建议尺寸，与Expanding共同影响按钮间空白 -->
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="connect_btn">
+       <!-- 《《《《《《《《《《《控件初始文字，运行时状态和按钮文字可能被控制器更新 -->
+       <property name="text">
+        <string>Connect</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="status_btn">
+       <!-- 《《《《《《《《《《《控件初始文字，运行时状态和按钮文字可能被控制器更新 -->
+       <property name="text">
+        <string>Debug</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="status_box">
+       <!-- 《《《《《《《《《《《控件最小尺寸；固定宽150时修改宽度须同步改maximumSize -->
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>0</height>
+        </size>
+       </property>
+       <!-- 《《《《《《《《《《《控件最大尺寸；固定宽150时修改宽度须同步改minimumSize -->
+       <property name="maximumSize">
+        <size>
+         <width>150</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Graphics_Page</class>
+   <extends>QGraphicsView</extends>
+   <header>graphics_page</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

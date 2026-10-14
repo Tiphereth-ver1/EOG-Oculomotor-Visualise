@@ -5,6 +5,5 @@ import time
 
 app = QApplication(sys.argv)
 window = MainWindow()
-window.setWindowTitle("EOG Oculomotor Visualise")
-window.show()
+window.show()  # 《《《《《《《《《《《普通窗口显示，如需全屏可改为window.showFullScreen()
 sys.exit(app.exec())

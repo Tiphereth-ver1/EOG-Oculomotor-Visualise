@@ -18,8 +18,7 @@ class Smooth_Pursuit(Trial):
         shift,
         trajectory,
         reps,
-        rest_duration_ms,
-        rest_duration_s,
+        rest
     ):
         super().__init__() 
         self.fz = fz
@@ -27,8 +26,7 @@ class Smooth_Pursuit(Trial):
         self.shift = shift
         self.trajectory = trajectory
         self.reps = reps
-        self.rest_duration_ms = rest_duration_ms
-        self.rest_duration_s = rest_duration_s
+        self.rest = rest
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_position)
@@ -69,11 +67,10 @@ class Smooth_Pursuit(Trial):
         self.start_time = time()
         self.send_message("Smooth Pursuit rep started")
 
-        self.timer.start(16) 
+        self.timer.start(16)  # 《《《《《《《《《《《追踪每16毫秒更新位置，约62.5次每秒，实际受事件循环影响
 
 
     def clean_graphics(self):
         self.target.setVisible(False)
         self.fixation.setVisible(False)
-        self.display_rest(self.rest_duration_s)
-        QTimer.singleShot(self.rest_duration_ms, partial(self.check_repeat, self.fixation, self.target))
+        QTimer.singleShot(self.rest, partial(self.check_repeat, self.fixation, self.target))  # 《《《《《《《《《《《重复后等待rest毫秒，包括最后一次，再检查是否完成
