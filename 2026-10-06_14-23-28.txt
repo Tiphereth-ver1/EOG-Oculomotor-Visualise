@@ -1,9 +1,0 @@
-[14:23:30.828] [+   2.253s] Experimental battery started.
-[14:23:41.421] [+  12.846s] Fixation rep started
-[14:23:42.430] [+  13.855s] Fixation rep finished
-[14:23:43.430] [+  14.855s] Fixation rep started
-[14:23:45.425] [+  16.850s] Fixation rep finished
-[14:23:46.426] [+  17.851s] Fixation rep started
-[14:23:47.428] [+  18.852s] Fixation rep finished
-[14:23:48.425] [+  19.850s] Fixation rep started
-[14:23:50.419] [+  21.843s] Fixation rep finished

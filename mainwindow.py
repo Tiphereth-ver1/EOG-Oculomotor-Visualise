@@ -5,6 +5,7 @@ from Trial import Experiment
 from ui_mainwindow import Ui_MainWindow
 from data_logger import Data_Logger
 from Connection import Serial_Worker
+from datetime import datetime
 
 class MainWindow(QMainWindow):
     connection_request = Signal()
@@ -33,7 +34,7 @@ class MainWindow(QMainWindow):
         self.experiment.updating_exp.connect(self.update_exp_status)
         self.experiment.updating_reps.connect(self.update_rep_status)
         self.experiment.enable_pause.connect(self.enable_pause)
-        self.experiment.disable_pause.connect(self.diable_pause)
+        self.experiment.disable_pause.connect(self.disable_pause)
         self.experiment.event_sent.connect(self.logger.add_event)  # 《《《《《《《《《《《转发事件字典；日志器当前将整个字典存入type字段
         self.experiment.experiment_complete.connect(self.logger.save)
 
@@ -53,7 +54,7 @@ class MainWindow(QMainWindow):
     def enable_pause(self):
         self.countdown_btn.setEnabled(True)
 
-    def diable_pause(self):
+    def disable_pause(self):
         self.countdown_btn.setEnabled(False)
 
     def countdowner(self):
@@ -65,7 +66,8 @@ class MainWindow(QMainWindow):
 
 
     def expt_start(self):
-        self.logger.write_message("Experimental battery started.")
+        self.expt_btn.setEnabled(False)
+        self.logger.write_message("Experimental battery started.", self.get_time())
         self.experiment.start(self.graphics.fixation, self.graphics.target)  # 《《《《《《《《《《《将两个圆点交给实验调度器，从首块开始
     
     def toggle_status(self):
@@ -81,11 +83,13 @@ class MainWindow(QMainWindow):
     def update_exp_status(self, experiment : str):
         self.current_experiment.setText(experiment)
 
+    def get_time(self):
+        return datetime.now().isoformat(timespec="milliseconds")
 
     def keyPressEvent(self, event):
 
         if event.key() == Qt.Key_E:  # 《《《《《《《《《《《按E标记运动伪迹，可在此修改快捷键
-            self.logger.write_message("Motion artefact detected.")
+            self.logger.write_message("Motion artefact detected.", self.get_time())            
             self.logger.add_event({
                 "type" : "ARTEFACT"
             })
