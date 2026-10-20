@@ -1,0 +1,23 @@
+[02:17:56.378] [+  65.798s] Experimental battery started.
+[02:18:06.554] [+  75.974s] Fixation rep started
+[02:18:08.552] [+  77.972s] Fixation rep finished
+[02:18:09.556] [+  78.976s] Fixation rep started
+[02:18:11.551] [+  80.971s] Fixation rep finished
+[02:18:12.549] [+  81.969s] Fixation rep started
+[02:18:13.560] [+  82.980s] Fixation rep finished
+[02:18:14.551] [+  83.972s] Fixation rep started
+[02:18:15.557] [+  84.977s] Fixation rep finished
+[02:18:57.752] [+ 127.172s] Duration: 1192, Direction: right
+[02:19:02.007] [+ 131.428s] Duration: 932, Direction: up
+[02:19:03.880] [+ 133.300s] Duration: 867, Direction: up
+[02:19:07.878] [+ 137.298s] Duration: 630, Direction: left
+[02:19:10.521] [+ 139.941s] Duration: 1633, Direction: down
+[02:19:13.368] [+ 142.788s] Duration: 1835, Direction: left
+[02:19:15.081] [+ 144.501s] Duration: 711, Direction: right
+[02:19:18.034] [+ 147.455s] Duration: 608, Direction: down
+[02:19:19.591] [+ 149.011s] Duration: 537, Direction: right
+[02:19:21.478] [+ 150.898s] Duration: 886, Direction: up
+[02:19:23.143] [+ 152.564s] Duration: 658, Direction: down
+[02:19:25.480] [+ 154.900s] Duration: 1314, Direction: left
+[02:19:27.551] [+ 156.971s] Duration: 1073, Direction: left
+[02:19:29.227] [+ 158.647s] Duration: 634, Direction: down

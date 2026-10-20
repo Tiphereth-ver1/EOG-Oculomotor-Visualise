@@ -103,6 +103,28 @@
    </property>
   </widget>
   <widget class="QDockWidget" name="dock">
+   <property name="styleSheet">
+    <string notr="true">QDockWidget, QWidget#sidebar_container {
+    background-color: black;
+    color: white;
+}
+QDockWidget::title {
+    background-color: black;
+    color: white;
+}
+QPushButton {
+    background-color: #202020;
+    color: white;
+    border: 1px solid #555555;
+    border-radius: 3px;
+    padding: 5px;
+}
+QPushButton:hover { background-color: #333333; }
+QPushButton:pressed { background-color: #444444; }
+QPushButton:disabled { color: #888888; border-color: #333333; }
+QTextEdit { background-color: black; color: white; border: 1px solid #555555; }
+QLabel { color: white; }</string>
+   </property>
    <!-- 《《《《《《《《《《《侧栏停靠面板可移动设置 -->
    <property name="features">
     <set>QDockWidget::DockWidgetMovable</set>
@@ -116,7 +138,25 @@
    </attribute>
    <widget class="QWidget" name="sidebar_container">
     <!-- 《《《《《《《《《《《侧栏排列入口，item顺序决定上下位置，可添加spacing和边距调整间距 -->
-    <layout class="QVBoxLayout" name="sidebar_layout" stretch="0,0,0,0,0,0,0">
+    <layout class="QVBoxLayout" name="sidebar_layout">
+     <item>
+      <widget class="QGroupBox" name="subject_group">
+       <property name="title"><string>被试信息</string></property>
+       <property name="styleSheet"><string notr="true">QGroupBox { color: white; } QLineEdit, QSpinBox, QComboBox { background-color: #202020; color: white; padding: 4px; } QComboBox QAbstractItemView { background-color: #202020; color: white; }</string></property>
+       <layout class="QFormLayout" name="subject_form">
+        <item row="4" column="0"><widget class="QLabel" name="subject_name_label"><property name="text"><string>姓名（英文）</string></property></widget></item>
+        <item row="4" column="1"><widget class="QLineEdit" name="subject_name_input"><property name="placeholderText"><string>例如 Zhang San</string></property><property name="maxLength"><number>100</number></property></widget></item>
+        <item row="0" column="0"><widget class="QLabel" name="subject_id_label"><property name="text"><string>被试编号</string></property></widget></item>
+        <item row="0" column="1"><widget class="QLineEdit" name="subject_id_input"><property name="placeholderText"><string>例如 01</string></property><property name="maxLength"><number>40</number></property></widget></item>
+        <item row="1" column="0"><widget class="QLabel" name="age_label"><property name="text"><string>年龄</string></property></widget></item>
+        <item row="1" column="1"><widget class="QSpinBox" name="age_input"><property name="maximum"><number>120</number></property><property name="specialValueText"><string>请选择</string></property></widget></item>
+        <item row="2" column="0"><widget class="QLabel" name="cdr_label"><property name="text"><string>CDR 等级</string></property></widget></item>
+        <item row="2" column="1"><widget class="QComboBox" name="cdr_input"><item><property name="text"><string>请选择</string></property></item><item><property name="text"><string>0</string></property></item><item><property name="text"><string>0.5</string></property></item><item><property name="text"><string>1</string></property></item><item><property name="text"><string>2</string></property></item><item><property name="text"><string>3</string></property></item></widget></item>
+        <item row="3" column="0"><widget class="QLabel" name="gender_label"><property name="text"><string>性别</string></property></widget></item>
+        <item row="3" column="1"><widget class="QComboBox" name="gender_input"><item><property name="text"><string>请选择</string></property></item><item><property name="text"><string>男</string></property></item><item><property name="text"><string>女</string></property></item><item><property name="text"><string>其他</string></property></item></widget></item>
+       </layout>
+      </widget>
+     </item>
      <item>
       <widget class="QPushButton" name="expt_btn">
        <!-- 《《《《《《《《《《《控件初始文字，运行时状态和按钮文字可能被控制器更新 -->
@@ -156,7 +196,8 @@
        <!-- 《《《《《《《《《《《信息框样式，grey背景、white边框，可改background-color、color、border -->
        <property name="styleSheet">
         <string notr="true">QWidget {
-                background-color: grey;
+                background-color: black;
+                color: white;
                 border: 1px solid white;
                 border-radius: 1px;
             }</string>

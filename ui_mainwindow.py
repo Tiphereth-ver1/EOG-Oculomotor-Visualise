@@ -4,7 +4,7 @@ from pathlib import Path
 
 from PySide6.QtCore import QDir, QFile, QIODevice
 from PySide6.QtUiTools import QUiLoader
-from PySide6.QtWidgets import QDockWidget, QLabel, QPushButton, QTextEdit, QWidget
+from PySide6.QtWidgets import QDockWidget, QLabel, QPushButton, QTextEdit, QWidget, QLineEdit, QSpinBox, QComboBox
 
 from graphics_page import Graphics_Page
 
@@ -43,6 +43,12 @@ class Ui_MainWindow:
 
         # These object names are the interface between the form and controller.
         controls = {
+            "subject_group": QWidget,
+            "subject_id_input": QLineEdit,
+            "subject_name_input": QLineEdit,
+            "age_input": QSpinBox,
+            "cdr_input": QComboBox,
+            "gender_input": QComboBox,
             "graphics": Graphics_Page,
             "dock": QDockWidget,
             "info": QWidget,

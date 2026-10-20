@@ -1,0 +1,153 @@
+被试编号: 03 | 姓名（英文）: ww | 年龄: 50 | CDR等级: 0.0 | 性别: 男
+[03:07:52.309] [+   0.002s] Experimental battery started.
+
+[03:08:02.519] [+  10.212s] 注视 experiment started.
+[03:08:02.520] [+  10.213s] Fixation rep started, trial 1
+[03:08:03.528] [+  11.221s] Fixation rep finished, trial 1
+[03:08:04.521] [+  12.213s] Fixation rep started, trial 2
+[03:08:05.526] [+  13.219s] Fixation rep finished, trial 2
+[03:08:06.520] [+  14.213s] Fixation rep started, trial 3
+[03:08:07.527] [+  15.220s] Fixation rep finished, trial 3
+[03:08:08.520] [+  16.213s] Fixation rep started, trial 4
+[03:08:09.521] [+  17.213s] Fixation rep finished, trial 4
+[03:08:10.520] [+  18.212s] 注视 experiment completed.
+
+[03:08:50.536] [+  58.229s] 阶跃眼跳 experiment started.
+[03:08:51.987] [+  59.680s] Duration: 1445, Direction: left, trial 1
+[03:08:54.647] [+  62.340s] Duration: 1648, Direction: left, trial 2
+[03:08:57.027] [+  64.719s] Duration: 1375, Direction: up, trial 3
+[03:08:58.888] [+  66.580s] Duration: 846, Direction: left, trial 4
+[03:09:01.256] [+  68.948s] Duration: 1373, Direction: right, trial 5
+[03:09:03.801] [+  71.493s] Duration: 1539, Direction: left, trial 6
+[03:09:06.118] [+  73.810s] Duration: 1299, Direction: down, trial 7
+[03:09:08.935] [+  76.628s] Duration: 1800, Direction: left, trial 8
+[03:09:11.288] [+  78.980s] Duration: 1350, Direction: right, trial 9
+[03:09:14.056] [+  81.749s] Duration: 1760, Direction: left, trial 10
+[03:09:16.959] [+  84.651s] Duration: 1896, Direction: down, trial 11
+[03:09:19.691] [+  87.383s] Duration: 1723, Direction: down, trial 12
+[03:09:21.240] [+  88.932s] Duration: 542, Direction: down, trial 13
+[03:09:23.304] [+  90.997s] Duration: 1059, Direction: right, trial 14
+[03:09:25.006] [+  92.699s] Duration: 698, Direction: left, trial 15
+[03:09:27.639] [+  95.332s] Duration: 1616, Direction: left, trial 16
+[03:09:29.385] [+  97.077s] Duration: 744, Direction: up, trial 17
+[03:09:31.896] [+  99.589s] Duration: 1501, Direction: down, trial 18
+[03:09:34.712] [+ 102.405s] Duration: 1807, Direction: up, trial 19
+[03:09:36.962] [+ 104.655s] Duration: 1237, Direction: left, trial 20
+[03:09:38.488] [+ 106.181s] Duration: 521, Direction: up, trial 21
+[03:09:41.055] [+ 108.748s] Duration: 1548, Direction: up, trial 22
+[03:09:43.817] [+ 111.509s] Duration: 1758, Direction: up, trial 23
+[03:09:45.927] [+ 113.620s] Duration: 1095, Direction: left, trial 24
+[03:09:46.724] [+ 114.417s] trial pause start: 阶跃眼跳, trial 24
+[03:09:47.444] [+ 115.137s] trial pause end: 阶跃眼跳, trial 24
+[03:09:47.837] [+ 115.530s] trial pause start: 阶跃眼跳, trial 25
+[03:09:48.240] [+ 115.933s] trial pause end: 阶跃眼跳, trial 25
+[03:09:48.741] [+ 116.434s] trial pause start: 阶跃眼跳, trial 26
+[03:09:49.124] [+ 116.816s] trial pause end: 阶跃眼跳, trial 26
+[03:09:49.485] [+ 117.177s] trial pause start: 阶跃眼跳, trial 27
+[03:09:50.073] [+ 117.766s] trial pause end: 阶跃眼跳, trial 27
+[03:09:50.604] [+ 118.297s] trial pause start: 阶跃眼跳, trial 28
+[03:09:51.035] [+ 118.728s] trial pause end: 阶跃眼跳, trial 28
+[03:09:51.596] [+ 119.289s] Duration: 562, Direction: right, trial 29
+[03:09:51.746] [+ 119.439s] trial pause start: 阶跃眼跳, trial 29
+[03:09:57.519] [+ 125.211s] trial pause end: 阶跃眼跳, trial 29
+[03:09:58.275] [+ 125.968s] Duration: 750, Direction: right, trial 30
+[03:09:59.271] [+ 126.964s] 阶跃眼跳 experiment completed.
+
+[03:10:40.269] [+ 167.962s] 阶跃眼跳 experiment started.
+[03:10:40.872] [+ 168.565s] Duration: 580, Direction: up, trial 1
+[03:10:43.458] [+ 171.151s] Duration: 1581, Direction: left, trial 2
+[03:10:46.146] [+ 173.839s] Duration: 1684, Direction: up, trial 3
+[03:10:47.673] [+ 175.366s] Duration: 507, Direction: right, trial 4
+[03:10:49.987] [+ 177.680s] Duration: 1327, Direction: up, trial 5
+[03:10:51.832] [+ 179.524s] Duration: 841, Direction: down, trial 6
+[03:10:54.552] [+ 182.245s] Duration: 1719, Direction: right, trial 7
+[03:10:57.096] [+ 184.789s] Duration: 1541, Direction: left, trial 8
+[03:10:59.084] [+ 186.777s] Duration: 970, Direction: left, trial 9
+[03:11:01.486] [+ 189.178s] Duration: 1407, Direction: left, trial 10
+[03:11:04.367] [+ 192.060s] Duration: 1861, Direction: right, trial 11
+[03:11:06.334] [+ 194.027s] Duration: 965, Direction: down, trial 12
+[03:11:08.180] [+ 195.872s] Duration: 831, Direction: up, trial 13
+[03:11:10.613] [+ 198.305s] Duration: 1432, Direction: down, trial 14
+[03:11:13.381] [+ 201.073s] Duration: 1761, Direction: up, trial 15
+[03:11:15.112] [+ 202.804s] Duration: 723, Direction: left, trial 16
+[03:11:17.523] [+ 205.216s] Duration: 1392, Direction: right, trial 17
+[03:11:20.405] [+ 208.097s] Duration: 1868, Direction: right, trial 18
+[03:11:23.096] [+ 210.789s] Duration: 1696, Direction: left, trial 19
+[03:11:26.067] [+ 213.760s] Duration: 1965, Direction: up, trial 20
+[03:11:29.059] [+ 216.752s] Duration: 1984, Direction: left, trial 21
+[03:11:30.824] [+ 218.517s] Duration: 761, Direction: up, trial 22
+[03:11:33.113] [+ 220.805s] Duration: 1297, Direction: down, trial 23
+[03:11:35.643] [+ 223.336s] Duration: 1525, Direction: down, trial 24
+[03:11:37.456] [+ 225.149s] Duration: 803, Direction: left, trial 25
+[03:11:39.073] [+ 226.766s] Duration: 608, Direction: down, trial 26
+[03:11:41.440] [+ 229.133s] Duration: 1363, Direction: up, trial 27
+[03:11:43.976] [+ 231.669s] Duration: 1522, Direction: right, trial 28
+[03:11:46.365] [+ 234.057s] Duration: 1391, Direction: down, trial 29
+[03:11:48.725] [+ 236.418s] Duration: 1349, Direction: down, trial 30
+[03:11:49.724] [+ 237.417s] 阶跃眼跳 experiment completed.
+
+[03:12:29.729] [+ 277.421s] 间隙眼跳 experiment started.
+[03:12:31.097] [+ 278.789s] Duration: 1171, Direction: right, trial 1
+[03:12:34.265] [+ 281.957s] Duration: 1951, Direction: up, trial 2
+[03:12:36.121] [+ 283.813s] Duration: 650, Direction: left, trial 3
+[03:12:38.692] [+ 286.385s] Duration: 1363, Direction: up, trial 4
+[03:12:41.417] [+ 289.110s] Duration: 1515, Direction: left, trial 5
+[03:12:44.616] [+ 292.309s] Duration: 1995, Direction: up, trial 6
+[03:12:47.740] [+ 295.433s] Duration: 1913, Direction: up, trial 7
+[03:12:49.832] [+ 297.525s] Duration: 880, Direction: down, trial 8
+[03:12:53.036] [+ 300.729s] Duration: 1990, Direction: right, trial 9
+[03:12:54.825] [+ 302.518s] Duration: 574, Direction: right, trial 10
+[03:12:57.635] [+ 305.327s] Duration: 1595, Direction: up, trial 11
+[03:12:59.847] [+ 307.540s] Duration: 1012, Direction: up, trial 12
+[03:13:02.838] [+ 310.530s] Duration: 1773, Direction: left, trial 13
+[03:13:05.349] [+ 313.042s] Duration: 1301, Direction: down, trial 14
+[03:13:08.051] [+ 315.744s] Duration: 1492, Direction: left, trial 15
+[03:13:10.648] [+ 318.341s] Duration: 1389, Direction: left, trial 16
+[03:13:13.177] [+ 320.869s] Duration: 1326, Direction: up, trial 17
+[03:13:16.182] [+ 323.875s] Duration: 1788, Direction: up, trial 18
+[03:13:18.725] [+ 326.418s] Duration: 1339, Direction: down, trial 19
+[03:13:21.864] [+ 329.556s] Duration: 1927, Direction: left, trial 20
+[03:13:24.393] [+ 332.086s] Duration: 1328, Direction: up, trial 21
+[03:13:27.348] [+ 335.041s] Duration: 1741, Direction: up, trial 22
+[03:13:30.136] [+ 337.829s] Duration: 1574, Direction: right, trial 23
+[03:13:31.945] [+ 339.638s] Duration: 595, Direction: left, trial 24
+[03:13:33.662] [+ 341.355s] Duration: 511, Direction: down, trial 25
+[03:13:35.992] [+ 343.685s] Duration: 1120, Direction: down, trial 26
+[03:13:37.928] [+ 345.621s] Duration: 730, Direction: left, trial 27
+[03:13:40.694] [+ 348.387s] Duration: 1561, Direction: down, trial 28
+[03:13:43.576] [+ 351.269s] Duration: 1661, Direction: up, trial 29
+[03:13:45.715] [+ 353.408s] Duration: 925, Direction: down, trial 30
+[03:13:46.712] [+ 354.404s] 间隙眼跳 experiment completed.
+
+[03:14:28.729] [+ 396.421s] 间隙眼跳 experiment started.
+[03:14:29.163] [+ 396.856s] trial pause start: 间隙眼跳, trial 1
+[03:14:29.335] [+ 397.028s] trial pause end: 间隙眼跳, trial 1
+[03:14:29.830] [+ 397.522s] trial pause start: 间隙眼跳, trial 2
+[03:14:30.063] [+ 397.756s] trial pause end: 间隙眼跳, trial 2
+[03:14:30.236] [+ 397.929s] trial pause start: 间隙眼跳, trial 3
+[03:14:30.765] [+ 398.457s] trial pause end: 间隙眼跳, trial 3
+[03:14:31.550] [+ 399.243s] Duration: 593, Direction: down, trial 4
+[03:14:34.243] [+ 401.935s] Duration: 1474, Direction: right, trial 5
+[03:14:36.161] [+ 403.853s] Duration: 713, Direction: down, trial 6
+[03:14:39.066] [+ 406.758s] Duration: 1694, Direction: left, trial 7
+[03:14:40.878] [+ 408.571s] trial pause start: 间隙眼跳, trial 8
+[03:14:41.978] [+ 409.670s] trial pause end: 间隙眼跳, trial 8
+[03:14:44.101] [+ 411.794s] Duration: 1907, Direction: up, trial 9
+[03:14:46.440] [+ 414.133s] Duration: 1133, Direction: up, trial 10
+[03:14:48.808] [+ 416.501s] Duration: 1146, Direction: up, trial 11
+[03:14:51.145] [+ 418.837s] Duration: 1135, Direction: right, trial 12
+[03:14:54.073] [+ 421.766s] Duration: 1713, Direction: left, trial 13
+[03:14:57.095] [+ 424.788s] Duration: 1825, Direction: up, trial 14
+[03:14:58.903] [+ 426.596s] Duration: 593, Direction: right, trial 15
+[03:15:01.447] [+ 429.140s] Duration: 1334, Direction: right, trial 16
+[03:15:03.257] [+ 430.949s] Duration: 596, Direction: left, trial 17
+[03:15:05.975] [+ 433.668s] Duration: 1513, Direction: left, trial 18
+[03:15:08.393] [+ 436.086s] Duration: 1208, Direction: left, trial 19
+[03:15:10.375] [+ 438.068s] Duration: 757, Direction: right, trial 20
+[03:15:12.104] [+ 439.797s] Duration: 528, Direction: up, trial 21
+[03:15:14.041] [+ 441.733s] Duration: 726, Direction: left, trial 22
+[03:15:16.962] [+ 444.654s] Duration: 1709, Direction: left, trial 23
+[03:15:18.802] [+ 446.495s] Duration: 637, Direction: down, trial 24
+[03:15:21.112] [+ 448.805s] Duration: 1098, Direction: left, trial 25
+[03:15:23.957] [+ 451.650s] Duration: 1638, Direction: down, trial 26
+[03:15:26.228] [+ 453.920s] Duration: 1061, Direction: up, trial 27

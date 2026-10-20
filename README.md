@@ -200,6 +200,15 @@ The new trial can then be registered in the experiment configuration:
 ```
 ## Logging
 
+During an active task, click **Pause** to hide the stimuli and stop the current
+trial. Click **Resume** to skip that interrupted trial and start the next one.
+If the interrupted trial was the last repetition, the block finishes normally.
+Rest pauses freeze the remaining rest time and do not create trial pause events.
+
+The session JSON stores each task pause as an event with `type: "trial pause"`,
+`start_time`, `end_time`, `task_key`, `block` (1-based), and `trial` (1-based).
+The text log also records `trial pause start` and `trial pause end`.
+
 The framework provides event-based logging for:
 
 - Experiment start/end
