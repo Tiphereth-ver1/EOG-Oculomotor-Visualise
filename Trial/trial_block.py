@@ -5,6 +5,7 @@ from .trajectories import (
 )
 
 from PySide6.QtCore import Qt, QTimer, QObject, Signal
+from datetime import datetime
 from . import (Trial, Step_Prosaccade, Smooth_Pursuit, 
 Overlap_Prosaccade, Gap_Prosaccade, Fixation)
 
@@ -16,7 +17,7 @@ TRIALS = {  # 《《《《《《《《《《《实验模块集中配置入口：
         "Description": "请注视白点，直到它消失。",  # 《《《《《《《《《《《受试者提示语，相邻字符串自动拼接，颜色修改后同步更新文字
         "params" : {
             "fixation_duration_s" : 1,  # 《《《《《《《《《《《单次注视持续时间，单位秒；检查间隔见fixation.py
-            "reps" : 4,  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
+            "reps" : 10,  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
             "rest" : 1000  # 《《《《《《《《《《《重复后的空屏休息，单位毫秒；最后一次也会等待，与块间休息不同
                 }
     },
@@ -30,7 +31,7 @@ TRIALS = {  # 《《《《《《《《《《《实验模块集中配置入口：
             "test_duration_s" : 25,  # 《《《《《《《《《《《单次平滑追踪持续时间，单位秒
             "shift" : 600,  # 《《《《《《《《《《《目标偏移距离或追踪振幅，单位场景坐标，不是圆点直径
             "trajectory" : horizontal_sinusoid,  # 《《《《《《《《《《《追踪轨迹，可选horizontal_sinusoid、circle或figure8
-            "reps" : 4,  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
+            "reps" : 10,  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
             "rest" : 5000  # 《《《《《《《《《《《重复后的空屏休息，单位毫秒；最后一次也会等待，与块间休息不同
                 }
     },
@@ -45,7 +46,7 @@ TRIALS = {  # 《《《《《《《《《《《实验模块集中配置入口：
             "gap" : 200,  # 《《《《《《《《《《《中心点消失到外围目标出现的空屏时间，单位毫秒
             "target_duration" : 1000,  # 《《《《《《《《《《《外围目标点显示时长，单位毫秒
             "shift" : 400,  # 《《《《《《《《《《《目标偏移距离或追踪振幅，单位场景坐标，不是圆点直径
-            "reps" : 30,  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
+            "reps" : 15,  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
         }
     },
 
@@ -59,7 +60,7 @@ TRIALS = {  # 《《《《《《《《《《《实验模块集中配置入口：
             "fixation_max" : 2000,  # 《《《《《《《《《《《随机中心注视时长上限，单位毫秒，不包含此值，必须大于下限
             "target_duration" : 1000,  # 《《《《《《《《《《《外围目标点显示时长，单位毫秒
             "shift" : 400,  # 《《《《《《《《《《《目标偏移距离或追踪振幅，单位场景坐标，不是圆点直径
-            "reps" : 30  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
+            "reps" : 15  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
             }
     },
 
@@ -74,7 +75,7 @@ TRIALS = {  # 《《《《《《《《《《《实验模块集中配置入口：
             "fixation_max" : 2000,  # 《《《《《《《《《《《随机中心注视时长上限，单位毫秒，不包含此值，必须大于下限
             "target_duration" : 1000,  # 《《《《《《《《《《《外围目标点显示时长，单位毫秒
             "shift" : 400,  # 《《《《《《《《《《《目标偏移距离或追踪振幅，单位场景坐标，不是圆点直径
-            "reps" : 40  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
+            "reps" : 15  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
         }
     },
 
@@ -88,7 +89,7 @@ TRIALS = {  # 《《《《《《《《《《《实验模块集中配置入口：
             "fixation_max" : 2000,  # 《《《《《《《《《《《随机中心注视时长上限，单位毫秒，不包含此值，必须大于下限
             "target_duration" : 1000,  # 《《《《《《《《《《《外围目标点显示时长，单位毫秒
             "shift" : 400,  # 《《《《《《《《《《《目标偏移距离或追踪振幅，单位场景坐标，不是圆点直径
-            "reps" : 20  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
+            "reps" : 15  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
         }
     },
 }
@@ -117,11 +118,15 @@ class Experiment(QObject):
     disable_pause = Signal()
     clear_text = Signal()
     experiment_complete = Signal()
+    pause_changed = Signal(bool)
     def __init__(self):
         super().__init__()
         self.trials : list[Trial]= []
         self.current_trial = 0
         self.current_name = ""
+        self.phase = "idle"
+        self.paused = False
+        self.pause_event = None
         self.countdown = True  # 《《《《《《《《《《《倒计时初始运行；暂停不控制刺激任务或singleShot等待
         self.rest_timer = QTimer()
         self.rest_timer.timeout.connect(self.update_rest)
@@ -139,6 +144,9 @@ class Experiment(QObject):
             trial.event_generated.connect(self.event_received)
     
     def start(self, fixation, target):
+        self.countdown = True
+        self.paused = False
+        self.pause_changed.emit(False)
         self.fixation = fixation
         self.target = target
 
@@ -146,10 +154,13 @@ class Experiment(QObject):
         self.start_next_trial()
     
     def on_trial_finished(self):
+        self.phase = "rest"
         self.current_trial += 1  # 《《《《《《《《《《《当前实验块完成后推进到下一个顺序条目
 
         # Experiment complete
         if self.current_trial >= len(self.trials):
+            self.phase = "idle"
+            self.disable_pause.emit()
             self.logger_message.emit("Experimental battery complete.")
             self.updating_exp.emit("Complete")  # 《《《《《《《《《《《全部实验结束后的侧栏状态文字
             self.updating_reps.emit(0, 0)
@@ -193,6 +204,8 @@ class Experiment(QObject):
 
 
     def start_next_trial(self):
+        self.phase = "instructions"
+        self.disable_pause.emit()
         if self.current_trial >= len(self.trials):
             self.logger_message.emit("Experimental battery complete.")
             return
@@ -219,12 +232,48 @@ class Experiment(QObject):
         self.updating_reps.emit(current,total)
 
     def begin_trial(self):
+        self.phase = "task"
         self.clear_text.emit()
         trial = self.trials[self.current_trial]
         self.logger_message.emit(f"{self.current_name} experiment started.")
         self.updating_exp.emit(self.current_name)
         trial.start(self.fixation, self.target)  # 《《《《《《《《《《《开始当前块的重复刺激任务
-        self.disable_pause.emit()
+        self.enable_pause.emit()
+
+    def toggle_pause(self):
+        if self.phase == "task":
+            trial = self.trials[self.current_trial]
+            if not self.paused:
+                if trial.phase not in ("active", "rest"):
+                    return
+                if trial.phase == "active":
+                    self.pause_event = {
+                        "type": "trial pause",
+                        "task": self.current_name,
+                        "task_key": EXPERIMENT_SEQUENCE[self.current_trial],
+                        "block": self.current_trial + 1,
+                        "trial": trial.current_reps,
+                        "start_time": datetime.now().isoformat(timespec="milliseconds"),
+                    }
+                    self.logger_message.emit(
+                        f"trial pause start: {self.current_name}, trial {trial.current_reps}")
+                trial.pause()
+                self.clear_text.emit()
+                self.paused = True
+                self.pause_changed.emit(True)
+            else:
+                if self.pause_event is not None:
+                    self.pause_event["end_time"] = datetime.now().isoformat(timespec="milliseconds")
+                    self.event_sent.emit(self.pause_event)
+                    self.logger_message.emit(
+                        f"trial pause end: {self.current_name}, trial {trial.current_reps}")
+                    self.pause_event = None
+                self.paused = False
+                self.pause_changed.emit(False)
+                trial.resume()
+        elif self.phase == "rest":
+            self.countdown = not self.countdown
+            self.pause_changed.emit(not self.countdown)
 
     def update_rest(self):
         if self.countdown == True:

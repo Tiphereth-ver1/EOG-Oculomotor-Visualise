@@ -52,6 +52,7 @@ class Fixation(Trial):
 
 
     def clean_graphics(self):
+        self.phase = "rest"
         self.target.setVisible(False)
         self.fixation.setVisible(False)
-        QTimer.singleShot(self.rest, partial(self.check_repeat, self.fixation, self.target))  # 《《《《《《《《《《《重复后等待rest毫秒，包括最后一次，再检查是否完成
+        self.schedule(self.rest, partial(self.check_repeat, self.fixation, self.target))  # 《《《《《《《《《《《重复后等待rest毫秒，包括最后一次，再检查是否完成

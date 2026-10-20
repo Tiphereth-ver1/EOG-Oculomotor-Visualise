@@ -34,10 +34,14 @@ class Smooth_Pursuit(Trial):
     def set_trajectory(self, trajectory):
         self.trajectory = trajectory
 
+    def position_at(self, t):
+        x, y = self.trajectory(t, self.shift, self.fz)
+        return self.direction_sign * x, y
+
     def update_position(self):
         t = time() - self.start_time
         # print(t)
-        x,y = self.trajectory(t, self.shift, self.fz)
+        x,y = self.position_at(t)
 
         self.target.move(x,y)
 
@@ -48,6 +52,7 @@ class Smooth_Pursuit(Trial):
             self.event_generated.emit({
                 "parameters" : {
                     "trial" : self.current_reps,
+                    "initial_direction": self.initial_direction,
                     "duration_ms" : self.test_duration_s * 1000
                 }
             })
@@ -56,21 +61,25 @@ class Smooth_Pursuit(Trial):
     def run(self, fixation : QGraphicsEllipseItem, target: QGraphicsEllipseItem):
         self.fixation = fixation
         self.target = target
+        # Alternate directions: ten repetitions give five right and five left.
+        self.direction_sign = 1 if self.current_reps % 2 else -1
+        self.initial_direction = "right" if self.direction_sign == 1 else "left"
 
         self.fixation.setVisible(False)
-        x,y = self.trajectory(0, self.shift, self.fz)
+        x,y = self.position_at(0)
 
         self.target.move(x,y)
 
         self.target.setVisible(True)
 
         self.start_time = time()
-        self.send_message("Smooth Pursuit rep started")
+        self.send_message(f"Smooth Pursuit rep started, initial direction: {self.initial_direction}")
 
         self.timer.start(16)  # 《《《《《《《《《《《追踪每16毫秒更新位置，约62.5次每秒，实际受事件循环影响
 
 
     def clean_graphics(self):
+        self.phase = "rest"
         self.target.setVisible(False)
         self.fixation.setVisible(False)
-        QTimer.singleShot(self.rest, partial(self.check_repeat, self.fixation, self.target))  # 《《《《《《《《《《《重复后等待rest毫秒，包括最后一次，再检查是否完成
+        self.schedule(self.rest, partial(self.check_repeat, self.fixation, self.target))  # 《《《《《《《《《《《重复后等待rest毫秒，包括最后一次，再检查是否完成

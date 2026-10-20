@@ -28,7 +28,7 @@ class Step_Prosaccade(Trial):
         fixation.move(0, 0)  # 《《《《《《《《《《《扫视任务中心点位置，可修改x/y坐标
         fixation.setVisible(True)
         target.setVisible(False)
-        QTimer.singleShot(
+        self.schedule(
             self.fixation_duration, 
             partial(
                 self.step_prosaccade, 
@@ -41,7 +41,7 @@ class Step_Prosaccade(Trial):
             target: QGraphicsEllipseItem, 
             direction : Direction):
         fixation.setVisible(False)
-        QTimer.singleShot(self.target_duration, partial(self.clean_graphics, fixation, target))  # 《《《《《《《《《《《外围目标显示target_duration毫秒后清屏并检查下一次重复
+        self.schedule(self.target_duration, partial(self.clean_graphics, fixation, target))  # 《《《《《《《《《《《外围目标显示target_duration毫秒后清屏并检查下一次重复
         if (direction == Direction.LEFT):
             target.move(-self.shift,0)  # 《《《《《《《《《《《目标位于中心左侧shift，改shift调整偏移
             target.setVisible(True)

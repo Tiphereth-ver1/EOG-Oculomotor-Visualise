@@ -1,0 +1,29 @@
+被试编号: 21 | 姓名（英文）: LS | 年龄: 21 | CDR等级: 1.0 | 性别: 女
+[03:04:16.517] [+   0.001s] Experimental battery started.
+[03:04:27.096] [+  10.580s] 注视 experiment started.
+[03:04:27.097] [+  10.581s] Fixation rep started, trial 1
+[03:04:28.104] [+  11.588s] Fixation rep finished, trial 1
+[03:04:29.096] [+  12.580s] Fixation rep started, trial 2
+[03:04:30.101] [+  13.585s] Fixation rep finished, trial 2
+[03:04:31.096] [+  14.580s] Fixation rep started, trial 3
+[03:04:32.105] [+  15.589s] Fixation rep finished, trial 3
+[03:04:33.096] [+  16.580s] Fixation rep started, trial 4
+[03:04:34.102] [+  17.586s] Fixation rep finished, trial 4
+[03:04:35.096] [+  18.580s] 注视 experiment completed.
+[03:05:15.095] [+  58.579s] 阶跃眼跳 experiment started.
+[03:05:16.167] [+  59.651s] Duration: 1058, Direction: right, trial 1
+[03:05:18.071] [+  61.555s] Duration: 900, Direction: right, trial 2
+[03:05:19.150] [+  62.634s] trial pause start: 阶跃眼跳, trial 3
+[03:05:19.656] [+  63.140s] trial pause end: 阶跃眼跳, trial 3
+[03:05:20.357] [+  63.841s] trial pause start: 阶跃眼跳, trial 4
+[03:05:21.203] [+  64.687s] trial pause end: 阶跃眼跳, trial 4
+[03:05:22.341] [+  65.825s] trial pause start: 阶跃眼跳, trial 5
+[03:05:22.633] [+  66.117s] trial pause end: 阶跃眼跳, trial 5
+[03:05:23.508] [+  66.992s] Duration: 861, Direction: down, trial 6
+[03:05:26.008] [+  69.492s] Duration: 1496, Direction: right, trial 7
+[03:05:26.661] [+  70.145s] trial pause start: 阶跃眼跳, trial 7
+[03:05:27.662] [+  71.146s] trial pause end: 阶跃眼跳, trial 7
+[03:05:28.825] [+  72.309s] Duration: 1155, Direction: left, trial 8
+[03:05:30.923] [+  74.407s] trial pause start: 阶跃眼跳, trial 9
+[03:05:33.237] [+  76.721s] trial pause end: 阶跃眼跳, trial 9
+[03:05:34.158] [+  77.642s] Duration: 918, Direction: left, trial 10

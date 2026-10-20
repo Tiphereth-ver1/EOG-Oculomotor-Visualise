@@ -28,7 +28,7 @@ class Gap_Prosaccade(Trial):
         fixation.move(0, 0)  # 《《《《《《《《《《《扫视任务中心点位置，可修改x/y坐标
         fixation.setVisible(True)
         target.setVisible(False)
-        QTimer.singleShot(
+        self.schedule(
             self.fixation_duration, 
             partial(
                 self.begin_gap, 
@@ -39,7 +39,7 @@ class Gap_Prosaccade(Trial):
     def begin_gap(self, fixation, target, direction):
         fixation.setVisible(False)
 
-        QTimer.singleShot(
+        self.schedule(
             self.gap,
             partial(
                 self.show_target,
@@ -53,7 +53,7 @@ class Gap_Prosaccade(Trial):
             fixation : QGraphicsEllipseItem, 
             target: QGraphicsEllipseItem, 
             direction : Direction):
-        QTimer.singleShot(self.target_duration, partial(self.clean_graphics, fixation, target))  # 《《《《《《《《《《《外围目标显示target_duration毫秒后清屏并检查下一次重复
+        self.schedule(self.target_duration, partial(self.clean_graphics, fixation, target))  # 《《《《《《《《《《《外围目标显示target_duration毫秒后清屏并检查下一次重复
         if (direction == Direction.LEFT):
             target.move(-self.shift,0)  # 《《《《《《《《《《《目标位于中心左侧shift，改shift调整偏移
             target.setVisible(True)
