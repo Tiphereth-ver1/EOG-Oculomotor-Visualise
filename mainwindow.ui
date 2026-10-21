@@ -2,7 +2,7 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
-  <!-- 《《《《《《《《《《《主窗口初始尺寸，下方width=1400、height=800 -->
+  <!-- CONFIG: Initial main window size: width=1400, height=800 below. -->
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,19 +11,19 @@
     <height>800</height>
    </rect>
   </property>
-  <!-- 《《《《《《《《《《《窗口或侧栏标题文字 -->
+  <!-- CONFIG: Window or sidebar title text. -->
   <property name="windowTitle">
    <string>EOG Oculomotor Visualise</string>
   </property>
   <widget class="Graphics_Page" name="graphics">
-   <!-- 《《《《《《《《《《《画布随布局空间伸缩，控件尺寸还受最小最大尺寸约束 -->
+   <!-- CONFIG: Resize the canvas with the layout, subject to minimum and maximum widget sizes. -->
    <property name="sizePolicy">
     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
      <horstretch>0</horstretch>
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <!-- 《《《《《《《《《《《场景范围(-600,-350,1200,700)，不改变轨迹；纵向shift=400超出此初始范围 -->
+   <!-- CONFIG: Scene rectangle (-600,-350,1200,700); does not alter trajectories. Vertical shift=400 exceeds this initial range. -->
    <property name="sceneRect">
     <rectf>
      <x>-600.000000000000000</x>
@@ -32,7 +32,7 @@
      <height>700.000000000000000</height>
     </rectf>
    </property>
-   <!-- 《《《《《《《《《《《画布背景RGB颜色，当前黑色，alpha=255不透明 -->
+   <!-- CONFIG: Canvas background RGB color: black; alpha=255 is opaque. -->
    <property name="backgroundBrush">
     <brush brushstyle="SolidPattern">
      <color alpha="255">
@@ -42,11 +42,11 @@
      </color>
     </brush>
    </property>
-   <!-- 《《《《《《《《《《《两个圆点共用直径24，各实验共用此值，单位场景坐标 -->
+   <!-- CONFIG: Shared dot diameter: 24 scene units for all experiments. -->
    <property name="stimulusDiameter" stdset="0">
     <double>24.000000000000000</double>
    </property>
-   <!-- 《《《《《《《《《《《扫视中心点RGB颜色，当前黄色 -->
+   <!-- CONFIG: Saccade central fixation RGB color: yellow. -->
    <property name="fixationColor" stdset="0">
     <color alpha="255">
      <red>255</red>
@@ -54,7 +54,7 @@
      <blue>0</blue>
     </color>
    </property>
-   <!-- 《《《《《《《《《《《外围目标、注视任务及追踪圆点RGB颜色，当前白色 -->
+   <!-- CONFIG: Peripheral target, fixation task, and pursuit dot RGB color: white. -->
    <property name="targetColor" stdset="0">
     <color alpha="255">
      <red>255</red>
@@ -62,7 +62,7 @@
      <blue>255</blue>
     </color>
    </property>
-   <!-- 《《《《《《《《《《《中央标题和倒计时字体，Arial 48磅粗体 -->
+   <!-- CONFIG: Central title and countdown font: Arial, 48 pt, bold. -->
    <property name="titleFont" stdset="0">
     <font>
      <family>Arial</family>
@@ -70,11 +70,11 @@
      <bold>true</bold>
     </font>
    </property>
-   <!-- 《《《《《《《《《《《场景文字换算DPI=100，影响实际字体大小 -->
+   <!-- CONFIG: Scene text conversion DPI=100; affects rendered font size. -->
    <property name="sceneTextDpi" stdset="0">
     <number>100</number>
    </property>
-   <!-- 《《《《《《《《《《《标题和倒计时RGB颜色，当前白色 -->
+   <!-- CONFIG: Title and countdown RGB color: white. -->
    <property name="titleColor" stdset="0">
     <color alpha="255">
      <red>255</red>
@@ -82,14 +82,14 @@
      <blue>255</blue>
     </color>
    </property>
-   <!-- 《《《《《《《《《《《中央提示语字体，Arial 36磅 -->
+   <!-- CONFIG: Central instruction font: Arial, 36 pt. -->
    <property name="instructionsFont" stdset="0">
     <font>
      <family>Arial</family>
      <pointsize>36</pointsize>
     </font>
    </property>
-   <!-- 《《《《《《《《《《《中央提示语RGB颜色，当前白色 -->
+   <!-- CONFIG: Central instruction RGB color: white. -->
    <property name="instructionsColor" stdset="0">
     <color alpha="255">
      <red>255</red>
@@ -97,7 +97,7 @@
      <blue>255</blue>
     </color>
    </property>
-   <!-- 《《《《《《《《《《《提示语换行宽度700，位置在graphics_page.py计算 -->
+   <!-- CONFIG: Instruction wrapping width: 700; position calculated in graphics_page.py. -->
    <property name="instructionsWidth" stdset="0">
     <double>700.000000000000000</double>
    </property>
@@ -125,11 +125,11 @@ QPushButton:disabled { color: #888888; border-color: #333333; }
 QTextEdit { background-color: black; color: white; border: 1px solid #555555; }
 QLabel { color: white; }</string>
    </property>
-   <!-- 《《《《《《《《《《《侧栏停靠面板可移动设置 -->
+   <!-- CONFIG: Control whether the sidebar dock can be moved. -->
    <property name="features">
     <set>QDockWidget::DockWidgetMovable</set>
    </property>
-   <!-- 《《《《《《《《《《《窗口或侧栏标题文字 -->
+   <!-- CONFIG: Window or sidebar title text. -->
    <property name="windowTitle">
     <string>Experiments</string>
    </property>
@@ -137,29 +137,29 @@ QLabel { color: white; }</string>
     <number>1</number>
    </attribute>
    <widget class="QWidget" name="sidebar_container">
-    <!-- 《《《《《《《《《《《侧栏排列入口，item顺序决定上下位置，可添加spacing和边距调整间距 -->
+    <!-- CONFIG: Sidebar layout: item order controls vertical order; adjust spacing and margins here. -->
     <layout class="QVBoxLayout" name="sidebar_layout">
      <item>
       <widget class="QGroupBox" name="subject_group">
-       <property name="title"><string>被试信息</string></property>
+       <property name="title"><string>Subject Information</string></property>
        <property name="styleSheet"><string notr="true">QGroupBox { color: white; } QLineEdit, QSpinBox, QComboBox { background-color: #202020; color: white; padding: 4px; } QComboBox QAbstractItemView { background-color: #202020; color: white; }</string></property>
        <layout class="QFormLayout" name="subject_form">
-        <item row="4" column="0"><widget class="QLabel" name="subject_name_label"><property name="text"><string>姓名（英文）</string></property></widget></item>
-        <item row="4" column="1"><widget class="QLineEdit" name="subject_name_input"><property name="placeholderText"><string>例如 Zhang San</string></property><property name="maxLength"><number>100</number></property></widget></item>
-        <item row="0" column="0"><widget class="QLabel" name="subject_id_label"><property name="text"><string>被试编号</string></property></widget></item>
-        <item row="0" column="1"><widget class="QLineEdit" name="subject_id_input"><property name="placeholderText"><string>例如 01</string></property><property name="maxLength"><number>40</number></property></widget></item>
-        <item row="1" column="0"><widget class="QLabel" name="age_label"><property name="text"><string>年龄</string></property></widget></item>
-        <item row="1" column="1"><widget class="QSpinBox" name="age_input"><property name="maximum"><number>120</number></property><property name="specialValueText"><string>请选择</string></property></widget></item>
-        <item row="2" column="0"><widget class="QLabel" name="cdr_label"><property name="text"><string>CDR 等级</string></property></widget></item>
-        <item row="2" column="1"><widget class="QComboBox" name="cdr_input"><item><property name="text"><string>请选择</string></property></item><item><property name="text"><string>0</string></property></item><item><property name="text"><string>0.5</string></property></item><item><property name="text"><string>1</string></property></item><item><property name="text"><string>2</string></property></item><item><property name="text"><string>3</string></property></item></widget></item>
-        <item row="3" column="0"><widget class="QLabel" name="gender_label"><property name="text"><string>性别</string></property></widget></item>
-        <item row="3" column="1"><widget class="QComboBox" name="gender_input"><item><property name="text"><string>请选择</string></property></item><item><property name="text"><string>男</string></property></item><item><property name="text"><string>女</string></property></item><item><property name="text"><string>其他</string></property></item></widget></item>
+        <item row="4" column="0"><widget class="QLabel" name="subject_name_label"><property name="text"><string>Name (English)</string></property></widget></item>
+        <item row="4" column="1"><widget class="QLineEdit" name="subject_name_input"><property name="placeholderText"><string>e.g. Zhang San</string></property><property name="maxLength"><number>100</number></property></widget></item>
+        <item row="0" column="0"><widget class="QLabel" name="subject_id_label"><property name="text"><string>Subject ID</string></property></widget></item>
+        <item row="0" column="1"><widget class="QLineEdit" name="subject_id_input"><property name="placeholderText"><string>e.g. 01</string></property><property name="maxLength"><number>40</number></property></widget></item>
+        <item row="1" column="0"><widget class="QLabel" name="age_label"><property name="text"><string>Age</string></property></widget></item>
+        <item row="1" column="1"><widget class="QSpinBox" name="age_input"><property name="maximum"><number>120</number></property><property name="specialValueText"><string>Select...</string></property></widget></item>
+        <item row="2" column="0"><widget class="QLabel" name="cdr_label"><property name="text"><string>CDR Rating</string></property></widget></item>
+        <item row="2" column="1"><widget class="QComboBox" name="cdr_input"><item><property name="text"><string>Select...</string></property></item><item><property name="text"><string>0</string></property></item><item><property name="text"><string>0.5</string></property></item><item><property name="text"><string>1</string></property></item><item><property name="text"><string>2</string></property></item><item><property name="text"><string>3</string></property></item></widget></item>
+        <item row="3" column="0"><widget class="QLabel" name="gender_label"><property name="text"><string>Gender</string></property></widget></item>
+        <item row="3" column="1"><widget class="QComboBox" name="gender_input"><item><property name="text"><string>Select...</string></property></item><item><property name="text"><string>Male</string></property></item><item><property name="text"><string>Female</string></property></item><item><property name="text"><string>Other</string></property></item></widget></item>
        </layout>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="expt_btn">
-       <!-- 《《《《《《《《《《《控件初始文字，运行时状态和按钮文字可能被控制器更新 -->
+       <!-- CONFIG: Initial widget text; the controller may update status and button text at runtime. -->
        <property name="text">
         <string>Experiment</string>
        </property>
@@ -167,11 +167,11 @@ QLabel { color: white; }</string>
      </item>
      <item>
       <widget class="QPushButton" name="countdown_btn">
-       <!-- 《《《《《《《《《《《Pause初始禁用，块间休息时由控制器启用 -->
+       <!-- CONFIG: Pause is initially disabled; the controller enables it during tasks and block rests. -->
        <property name="enabled">
         <bool>false</bool>
        </property>
-       <!-- 《《《《《《《《《《《控件初始文字，运行时状态和按钮文字可能被控制器更新 -->
+       <!-- CONFIG: Initial widget text; the controller may update status and button text at runtime. -->
        <property name="text">
         <string>Pause</string>
        </property>
@@ -179,21 +179,21 @@ QLabel { color: white; }</string>
      </item>
      <item>
       <widget class="QWidget" name="info" native="true">
-       <!-- 《《《《《《《《《《《控件最小尺寸；固定宽150时修改宽度须同步改maximumSize -->
+       <!-- CONFIG: Minimum widget size; update maximumSize too when changing the fixed width of 150. -->
        <property name="minimumSize">
         <size>
          <width>150</width>
          <height>0</height>
         </size>
        </property>
-       <!-- 《《《《《《《《《《《控件最大尺寸；固定宽150时修改宽度须同步改minimumSize -->
+       <!-- CONFIG: Maximum widget size; update minimumSize too when changing the fixed width of 150. -->
        <property name="maximumSize">
         <size>
          <width>150</width>
          <height>16777215</height>
         </size>
        </property>
-       <!-- 《《《《《《《《《《《信息框样式，grey背景、white边框，可改background-color、color、border -->
+       <!-- CONFIG: Info box style: grey background, white border; edit background-color, color, and border. -->
        <property name="styleSheet">
         <string notr="true">QWidget {
                 background-color: black;
@@ -205,22 +205,22 @@ QLabel { color: white; }</string>
        <layout class="QVBoxLayout" name="info_layout">
         <item>
          <widget class="QLabel" name="current_experiment">
-          <!-- 《《《《《《《《《《《侧栏标签字体字号，修改family、pointsize和bold -->
+          <!-- CONFIG: Sidebar label font and size; edit family, pointsize, and bold. -->
           <property name="font">
            <font>
             <family>Arial</family>
             <pointsize>16</pointsize>
            </font>
           </property>
-          <!-- 《《《《《《《《《《《控件初始文字，运行时状态和按钮文字可能被控制器更新 -->
+          <!-- CONFIG: Initial widget text; the controller may update status and button text at runtime. -->
           <property name="text">
            <string>None</string>
           </property>
-          <!-- 《《《《《《《《《《《侧栏文字对齐方式，当前居中 -->
+          <!-- CONFIG: Sidebar text alignment: centered. -->
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
-          <!-- 《《《《《《《《《《《侧栏实验名称自动换行开关 -->
+          <!-- CONFIG: Enable or disable wrapping of sidebar experiment names. -->
           <property name="wordWrap">
            <bool>true</bool>
           </property>
@@ -228,7 +228,7 @@ QLabel { color: white; }</string>
         </item>
         <item>
          <widget class="QLabel" name="reps_count">
-          <!-- 《《《《《《《《《《《侧栏标签字体字号，修改family、pointsize和bold -->
+          <!-- CONFIG: Sidebar label font and size; edit family, pointsize, and bold. -->
           <property name="font">
            <font>
             <family>Arial</family>
@@ -236,11 +236,11 @@ QLabel { color: white; }</string>
             <bold>true</bold>
            </font>
           </property>
-          <!-- 《《《《《《《《《《《控件初始文字，运行时状态和按钮文字可能被控制器更新 -->
+          <!-- CONFIG: Initial widget text; the controller may update status and button text at runtime. -->
           <property name="text">
            <string>0/0</string>
           </property>
-          <!-- 《《《《《《《《《《《侧栏文字对齐方式，当前居中 -->
+          <!-- CONFIG: Sidebar text alignment: centered. -->
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
@@ -257,7 +257,7 @@ QLabel { color: white; }</string>
        <property name="sizeType">
         <enum>QSizePolicy::Expanding</enum>
        </property>
-       <!-- 《《《《《《《《《《《伸缩空白建议尺寸，与Expanding共同影响按钮间空白 -->
+       <!-- CONFIG: Suggested spacer size; works with Expanding to control space between buttons. -->
        <property name="sizeHint" stdset="0">
         <size>
          <width>0</width>
@@ -268,7 +268,7 @@ QLabel { color: white; }</string>
      </item>
      <item>
       <widget class="QPushButton" name="connect_btn">
-       <!-- 《《《《《《《《《《《控件初始文字，运行时状态和按钮文字可能被控制器更新 -->
+       <!-- CONFIG: Initial widget text; the controller may update status and button text at runtime. -->
        <property name="text">
         <string>Connect</string>
        </property>
@@ -276,7 +276,7 @@ QLabel { color: white; }</string>
      </item>
      <item>
       <widget class="QPushButton" name="status_btn">
-       <!-- 《《《《《《《《《《《控件初始文字，运行时状态和按钮文字可能被控制器更新 -->
+       <!-- CONFIG: Initial widget text; the controller may update status and button text at runtime. -->
        <property name="text">
         <string>Debug</string>
        </property>
@@ -284,14 +284,14 @@ QLabel { color: white; }</string>
      </item>
      <item>
       <widget class="QTextEdit" name="status_box">
-       <!-- 《《《《《《《《《《《控件最小尺寸；固定宽150时修改宽度须同步改maximumSize -->
+       <!-- CONFIG: Minimum widget size; update maximumSize too when changing the fixed width of 150. -->
        <property name="minimumSize">
         <size>
          <width>150</width>
          <height>0</height>
         </size>
        </property>
-       <!-- 《《《《《《《《《《《控件最大尺寸；固定宽150时修改宽度须同步改minimumSize -->
+       <!-- CONFIG: Maximum widget size; update minimumSize too when changing the fixed width of 150. -->
        <property name="maximumSize">
         <size>
          <width>150</width>

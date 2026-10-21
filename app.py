@@ -5,5 +5,5 @@ import time
 
 app = QApplication(sys.argv)
 window = MainWindow()
-window.show()  # 《《《《《《《《《《《普通窗口显示，如需全屏可改为window.showFullScreen()
+window.show()  # CONFIG: Show a normal window; use window.showFullScreen() for full screen.
 sys.exit(app.exec())

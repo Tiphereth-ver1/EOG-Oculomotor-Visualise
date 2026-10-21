@@ -42,17 +42,17 @@ class Fixation(Trial):
         self.target = target
 
         self.fixation.setVisible(False)
-        self.target.move(0,0)  # 《《《《《《《《《《《注视任务使用targetColor目标点并放在中心，不使用黄色fixation点
+        self.target.move(0,0)  # CONFIG: Use the targetColor dot at the center for fixation tasks, rather than the yellow fixation dot.
         self.target.setVisible(True)
 
         self.start_time = time()
         self.send_message("Fixation rep started")
 
-        self.timer.start(1000)  # 《《《《《《《《《《《注视每1000毫秒检查结束，小数秒时长会受此间隔影响
+        self.timer.start(1000)  # CONFIG: Check fixation completion every 1000 ms; this interval affects fractional-second durations.
 
 
     def clean_graphics(self):
         self.phase = "rest"
         self.target.setVisible(False)
         self.fixation.setVisible(False)
-        self.schedule(self.rest, partial(self.check_repeat, self.fixation, self.target))  # 《《《《《《《《《《《重复后等待rest毫秒，包括最后一次，再检查是否完成
+        self.schedule(self.rest, partial(self.check_repeat, self.fixation, self.target))  # CONFIG: Wait rest milliseconds after each repetition, including the last, before checking completion.

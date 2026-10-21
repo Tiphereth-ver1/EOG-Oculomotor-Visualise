@@ -16,5 +16,5 @@ def circle(t, amplitude, frequency):
 def figure8(t, amplitude, frequency):
     return (
         amplitude * sin(2*pi*frequency*t),
-        amplitude * 0.5 * sin(4*pi*frequency*t)  # 《《《《《《《《《《《8字轨迹纵向振幅为横向一半，频率为横向两倍
+        amplitude * 0.5 * sin(4*pi*frequency*t)  # CONFIG: Figure-eight vertical amplitude is half the horizontal amplitude, at twice the frequency.
     )

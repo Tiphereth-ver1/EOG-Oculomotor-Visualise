@@ -20,7 +20,7 @@ class SubjectRecordsTests(unittest.TestCase):
         window.subject_name_input.setText("Zhang San")
         window.age_input.setValue(65)
         window.cdr_input.setCurrentText("0.5")
-        window.gender_input.setCurrentText("女")
+        window.gender_input.setCurrentText("Female")
         window.show()
         app.processEvents()
         self.assertTrue(window.subject_group.isVisible())
@@ -34,14 +34,14 @@ class SubjectRecordsTests(unittest.TestCase):
             logger = Data_Logger()
             self.assertIsNone(logger.file)
             logger.output_dir = Path(folder)
-            info = {"subject_id": "01", "subject_name": "Zhang San", "age": 65, "cdr": 0.5, "gender": "女"}
+            info = {"subject_id": "01", "subject_name": "Zhang San", "age": 65, "cdr": 0.5, "gender": "Female"}
             logger.init_main_data(info)
             logger.write_message("Experimental battery started.")
             logger.save()
             logger.close_logger()
             self.assertRegex(logger.txt_path.name, r"^Subject01-\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}\.txt$")
             lines = logger.txt_path.read_text(encoding="utf-8").splitlines()
-            self.assertEqual(lines[0], "被试编号: 01 | 姓名（英文）: Zhang San | 年龄: 65 | CDR等级: 0.5 | 性别: 女")
+            self.assertEqual(lines[0], "Subject ID: 01 | Name (English): Zhang San | Age: 65 | CDR Rating: 0.5 | Gender: Female")
             self.assertIn("Experimental battery started.", lines[1])
             session = json.loads(logger.json_path.read_text(encoding="utf-8"))["session"]
             for key, value in info.items():

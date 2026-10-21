@@ -75,11 +75,11 @@ class Smooth_Pursuit(Trial):
         self.start_time = time()
         self.send_message(f"Smooth Pursuit rep started, initial direction: {self.initial_direction}")
 
-        self.timer.start(16)  # 《《《《《《《《《《《追踪每16毫秒更新位置，约62.5次每秒，实际受事件循环影响
+        self.timer.start(16)  # CONFIG: Update pursuit position every 16 ms, about 62.5 times per second; actual timing depends on the event loop.
 
 
     def clean_graphics(self):
         self.phase = "rest"
         self.target.setVisible(False)
         self.fixation.setVisible(False)
-        self.schedule(self.rest, partial(self.check_repeat, self.fixation, self.target))  # 《《《《《《《《《《《重复后等待rest毫秒，包括最后一次，再检查是否完成
+        self.schedule(self.rest, partial(self.check_repeat, self.fixation, self.target))  # CONFIG: Wait rest milliseconds after each repetition, including the last, before checking completion.

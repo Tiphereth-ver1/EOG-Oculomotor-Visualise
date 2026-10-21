@@ -10,91 +10,91 @@ from . import (Trial, Step_Prosaccade, Smooth_Pursuit,
 Overlap_Prosaccade, Gap_Prosaccade, Fixation)
 
 
-TRIALS = {  # 《《《《《《《《《《《实验模块集中配置入口：修改名称、受试者提示语和刺激参数
+TRIALS = {  # CONFIG: Central experiment configuration: edit names, participant instructions, and stimulus parameters here.
     "fixation" : {
-        "class": Fixation,  # 《《《《《《《《《《《此实验块对应的刺激实现类
-        "name" : "注视",  # 《《《《《《《《《《《模块名称，中央标题和侧栏使用此文字
-        "Description": "请注视白点，直到它消失。",  # 《《《《《《《《《《《受试者提示语，相邻字符串自动拼接，颜色修改后同步更新文字
+        "class": Fixation,  # CONFIG: Stimulus implementation class for this block.
+        "name" : "Fixation",  # CONFIG: Block name displayed in the central title and sidebar.
+        "Description": "Please look at the white dot until it disappears.",  # CONFIG: Participant instructions; adjacent strings concatenate automatically. Update color references when changing colors.
         "params" : {
-            "fixation_duration_s" : 1,  # 《《《《《《《《《《《单次注视持续时间，单位秒；检查间隔见fixation.py
-            "reps" : 10,  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
-            "rest" : 1000  # 《《《《《《《《《《《重复后的空屏休息，单位毫秒；最后一次也会等待，与块间休息不同
+            "fixation_duration_s" : 1,  # CONFIG: Fixation duration per repetition in seconds; see fixation.py for the check interval.
+            "reps" : 10,  # CONFIG: Repetitions per block; each occurrence of a repeated block runs this many repetitions.
+            "rest" : 1000  # CONFIG: Blank-screen rest after each repetition in milliseconds, including the last; separate from rest between blocks.
                 }
     },
 
     "smooth_pursuit" : {
-        "class": Smooth_Pursuit,  # 《《《《《《《《《《《此实验块对应的刺激实现类
-        "name" : "慢眼动跟随",  # 《《《《《《《《《《《模块名称，中央标题和侧栏使用此文字
-        "Description": "请注视屏幕上的白点，并控制视线跟随屏幕上白点移动.",  # 《《《《《《《《《《《受试者提示语，相邻字符串自动拼接，颜色修改后同步更新文字
+        "class": Smooth_Pursuit,  # CONFIG: Stimulus implementation class for this block.
+        "name" : "Smooth Pursuit",  # CONFIG: Block name displayed in the central title and sidebar.
+        "Description": "Please look at the white dot on the screen and follow it with your eyes as it moves.",  # CONFIG: Participant instructions; adjacent strings concatenate automatically. Update color references when changing colors.
         "params" : {
-            "fz" : 0.2,  # 《《《《《《《《《《《追踪频率Hz，0.2表示每周期5秒
-            "test_duration_s" : 25,  # 《《《《《《《《《《《单次平滑追踪持续时间，单位秒
-            "shift" : 600,  # 《《《《《《《《《《《目标偏移距离或追踪振幅，单位场景坐标，不是圆点直径
-            "trajectory" : horizontal_sinusoid,  # 《《《《《《《《《《《追踪轨迹，可选horizontal_sinusoid、circle或figure8
-            "reps" : 10,  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
-            "rest" : 5000  # 《《《《《《《《《《《重复后的空屏休息，单位毫秒；最后一次也会等待，与块间休息不同
+            "fz" : 0.2,  # CONFIG: Pursuit frequency in Hz; 0.2 means a five-second cycle.
+            "test_duration_s" : 25,  # CONFIG: Smooth pursuit duration per repetition in seconds.
+            "shift" : 600,  # CONFIG: Target displacement or pursuit amplitude in scene units, rather than dot diameter.
+            "trajectory" : horizontal_sinusoid,  # CONFIG: Pursuit trajectory: horizontal_sinusoid, circle, or figure8.
+            "reps" : 10,  # CONFIG: Repetitions per block; each occurrence of a repeated block runs this many repetitions.
+            "rest" : 5000  # CONFIG: Blank-screen rest after each repetition in milliseconds, including the last; separate from rest between blocks.
                 }
     },
     "gap_prosaccade" : {
-        "class": Gap_Prosaccade,  # 《《《《《《《《《《《此实验块对应的刺激实现类
-        "name" : "间隙眼跳",  # 《《《《《《《《《《《模块名称，中央标题和侧栏使用此文字
-        "Description": "注视黄色圆点，当白色圆点出现时，将视线转向白色圆点。"  # 《《《《《《《《《《《受试者提示语，相邻字符串自动拼接，颜色修改后同步更新文字
-                        "在白色圆点出现之前，黄色圆点会先消失。",
+        "class": Gap_Prosaccade,  # CONFIG: Stimulus implementation class for this block.
+        "name" : "Gap Prosaccade",  # CONFIG: Block name displayed in the central title and sidebar.
+        "Description": "Look at the yellow dot. When the white dot appears, look toward it. "  # CONFIG: Participant instructions; adjacent strings concatenate automatically. Update color references when changing colors.
+                        "The yellow dot will disappear before the white dot appears.",
         "params" : {
-            "fixation_min" : 500,  # 《《《《《《《《《《《随机中心注视时长下限，单位毫秒，包含此值
-            "fixation_max" : 2000,  # 《《《《《《《《《《《随机中心注视时长上限，单位毫秒，不包含此值，必须大于下限
-            "gap" : 200,  # 《《《《《《《《《《《中心点消失到外围目标出现的空屏时间，单位毫秒
-            "target_duration" : 1000,  # 《《《《《《《《《《《外围目标点显示时长，单位毫秒
-            "shift" : 400,  # 《《《《《《《《《《《目标偏移距离或追踪振幅，单位场景坐标，不是圆点直径
-            "reps" : 15,  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
+            "fixation_min" : 500,  # CONFIG: Inclusive lower bound for random central fixation duration in milliseconds.
+            "fixation_max" : 2000,  # CONFIG: Exclusive upper bound for random central fixation duration in milliseconds; must exceed the lower bound.
+            "gap" : 200,  # CONFIG: Blank interval between central fixation offset and peripheral target onset in milliseconds.
+            "target_duration" : 1000,  # CONFIG: Peripheral target display duration in milliseconds.
+            "shift" : 400,  # CONFIG: Target displacement or pursuit amplitude in scene units, rather than dot diameter.
+            "reps" : 15,  # CONFIG: Repetitions per block; each occurrence of a repeated block runs this many repetitions.
         }
     },
 
     "step_prosaccade" : {
-        "class": Step_Prosaccade,  # 《《《《《《《《《《《此实验块对应的刺激实现类；反向扫视也复用此类，仅提示语要求看相反方向
-        "name" : "阶跃眼跳",  # 《《《《《《《《《《《模块名称，中央标题和侧栏使用此文字
-        "Description": "注视黄色圆点，当白色圆点出现时，"  # 《《《《《《《《《《《受试者提示语，相邻字符串自动拼接，颜色修改后同步更新文字
-                        "将视线转向白色圆点。",
+        "class": Step_Prosaccade,  # CONFIG: Stimulus class for this block; antisaccades reuse this class with instructions to look in the opposite direction.
+        "name" : "Step Prosaccade",  # CONFIG: Block name displayed in the central title and sidebar.
+        "Description": "Look at the yellow dot. When the white dot appears, "  # CONFIG: Participant instructions; adjacent strings concatenate automatically. Update color references when changing colors.
+                        "look toward the white dot.",
         "params" : {
-            "fixation_min" : 500,  # 《《《《《《《《《《《随机中心注视时长下限，单位毫秒，包含此值
-            "fixation_max" : 2000,  # 《《《《《《《《《《《随机中心注视时长上限，单位毫秒，不包含此值，必须大于下限
-            "target_duration" : 1000,  # 《《《《《《《《《《《外围目标点显示时长，单位毫秒
-            "shift" : 400,  # 《《《《《《《《《《《目标偏移距离或追踪振幅，单位场景坐标，不是圆点直径
-            "reps" : 15  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
+            "fixation_min" : 500,  # CONFIG: Inclusive lower bound for random central fixation duration in milliseconds.
+            "fixation_max" : 2000,  # CONFIG: Exclusive upper bound for random central fixation duration in milliseconds; must exceed the lower bound.
+            "target_duration" : 1000,  # CONFIG: Peripheral target display duration in milliseconds.
+            "shift" : 400,  # CONFIG: Target displacement or pursuit amplitude in scene units, rather than dot diameter.
+            "reps" : 15  # CONFIG: Repetitions per block; each occurrence of a repeated block runs this many repetitions.
             }
     },
 
     "overlap_prosaccade" : {
-        "class": Overlap_Prosaccade,  # 《《《《《《《《《《《此实验块对应的刺激实现类
-        "name" : "重叠眼跳",  # 《《《《《《《《《《《模块名称，中央标题和侧栏使用此文字
-        "Description": "注视黄色圆点，当白色圆点出现时，"  # 《《《《《《《《《《《受试者提示语，相邻字符串自动拼接，颜色修改后同步更新文字
-                        "将视线转向白色圆点。 "
-                        "黄色圆点不会消失。", 
+        "class": Overlap_Prosaccade,  # CONFIG: Stimulus implementation class for this block.
+        "name" : "Overlap Prosaccade",  # CONFIG: Block name displayed in the central title and sidebar.
+        "Description": "Look at the yellow dot. When the white dot appears, "  # CONFIG: Participant instructions; adjacent strings concatenate automatically. Update color references when changing colors.
+                        "look toward the white dot. "
+                        "The yellow dot will remain visible.",
         "params" : {
-            "fixation_min" : 500,  # 《《《《《《《《《《《随机中心注视时长下限，单位毫秒，包含此值
-            "fixation_max" : 2000,  # 《《《《《《《《《《《随机中心注视时长上限，单位毫秒，不包含此值，必须大于下限
-            "target_duration" : 1000,  # 《《《《《《《《《《《外围目标点显示时长，单位毫秒
-            "shift" : 400,  # 《《《《《《《《《《《目标偏移距离或追踪振幅，单位场景坐标，不是圆点直径
-            "reps" : 15  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
+            "fixation_min" : 500,  # CONFIG: Inclusive lower bound for random central fixation duration in milliseconds.
+            "fixation_max" : 2000,  # CONFIG: Exclusive upper bound for random central fixation duration in milliseconds; must exceed the lower bound.
+            "target_duration" : 1000,  # CONFIG: Peripheral target display duration in milliseconds.
+            "shift" : 400,  # CONFIG: Target displacement or pursuit amplitude in scene units, rather than dot diameter.
+            "reps" : 15  # CONFIG: Repetitions per block; each occurrence of a repeated block runs this many repetitions.
         }
     },
 
     "step_antisaccade" : {
-        "class": Step_Prosaccade,  # 《《《《《《《《《《《此实验块对应的刺激实现类；反向扫视也复用此类，仅提示语要求看相反方向
-        "name" : "阶跃反向眼跳",  # 《《《《《《《《《《《模块名称，中央标题和侧栏使用此文字
-        "Description": "注视黄色圆点，当白色圆点出现时，"  # 《《《《《《《《《《《受试者提示语，相邻字符串自动拼接，颜色修改后同步更新文字
-                        "将视线转向与白色圆点相反的方向。",
+        "class": Step_Prosaccade,  # CONFIG: Stimulus class for this block; antisaccades reuse this class with instructions to look in the opposite direction.
+        "name" : "Step Antisaccade",  # CONFIG: Block name displayed in the central title and sidebar.
+        "Description": "Look at the yellow dot. When the white dot appears, "  # CONFIG: Participant instructions; adjacent strings concatenate automatically. Update color references when changing colors.
+                        "look in the direction opposite to the white dot.",
         "params" : {
-            "fixation_min" : 500,  # 《《《《《《《《《《《随机中心注视时长下限，单位毫秒，包含此值
-            "fixation_max" : 2000,  # 《《《《《《《《《《《随机中心注视时长上限，单位毫秒，不包含此值，必须大于下限
-            "target_duration" : 1000,  # 《《《《《《《《《《《外围目标点显示时长，单位毫秒
-            "shift" : 400,  # 《《《《《《《《《《《目标偏移距离或追踪振幅，单位场景坐标，不是圆点直径
-            "reps" : 15  # 《《《《《《《《《《《本实验块重复次数；顺序中出现多次的同名块各自执行这些次数
+            "fixation_min" : 500,  # CONFIG: Inclusive lower bound for random central fixation duration in milliseconds.
+            "fixation_max" : 2000,  # CONFIG: Exclusive upper bound for random central fixation duration in milliseconds; must exceed the lower bound.
+            "target_duration" : 1000,  # CONFIG: Peripheral target display duration in milliseconds.
+            "shift" : 400,  # CONFIG: Target displacement or pursuit amplitude in scene units, rather than dot diameter.
+            "reps" : 15  # CONFIG: Repetitions per block; each occurrence of a repeated block runs this many repetitions.
         }
     },
 }
 
-EXPERIMENT_SEQUENCE = [  # 《《《《《《《《《《《实验块执行顺序，可增删重排；重复条目再次执行完整实验块
+EXPERIMENT_SEQUENCE = [  # CONFIG: Block execution order; add, remove, or reorder entries. Repeated entries run the entire block again.
     "fixation",
     "step_prosaccade",
     "step_prosaccade",
@@ -127,7 +127,7 @@ class Experiment(QObject):
         self.phase = "idle"
         self.paused = False
         self.pause_event = None
-        self.countdown = True  # 《《《《《《《《《《《倒计时初始运行；暂停不控制刺激任务或singleShot等待
+        self.countdown = True  # CONFIG: Start with the countdown running; task pauses are handled separately from this flag.
         self.rest_timer = QTimer()
         self.rest_timer.timeout.connect(self.update_rest)
         self.test_timer = QTimer()
@@ -155,39 +155,39 @@ class Experiment(QObject):
     
     def on_trial_finished(self):
         self.phase = "rest"
-        self.current_trial += 1  # 《《《《《《《《《《《当前实验块完成后推进到下一个顺序条目
+        self.current_trial += 1  # CONFIG: Advance to the next sequence entry after the current block finishes.
 
         # Experiment complete
         if self.current_trial >= len(self.trials):
             self.phase = "idle"
             self.disable_pause.emit()
             self.logger_message.emit("Experimental battery complete.")
-            self.updating_exp.emit("Complete")  # 《《《《《《《《《《《全部实验结束后的侧栏状态文字
+            self.updating_exp.emit("Complete")  # CONFIG: Sidebar status text after all experiments finish.
             self.updating_reps.emit(0, 0)
-            self.show_title.emit("Complete")  # 《《《《《《《《《《《全部实验结束后的中央提示语
-            self.experiment_complete.emit()  # 《《《《《《《《《《《通知日志器保存本轮JSON
+            self.show_title.emit("Complete")  # CONFIG: Central message after all experiments finish.
+            self.experiment_complete.emit()  # CONFIG: Notify the logger to save the session JSON.
             return
 
 
-        self.rest_remaining = 30  # 《《《《《《《《《《《实验块之间休息30秒；最后一个块后直接结束
+        self.rest_remaining = 30  # CONFIG: Rest for 30 seconds between blocks; finish immediately after the last block.
 
-        self.updating_exp.emit("Rest")  # 《《《《《《《《《《《块间休息时的侧栏状态文字
+        self.updating_exp.emit("Rest")  # CONFIG: Sidebar status text during rest between blocks.
         self.updating_reps.emit(0,0)
         self.show_title.emit(str(self.rest_remaining))
         self.logger_message.emit(f"{self.current_name} experiment completed.")
         self.enable_pause.emit()
 
-        self.rest_timer.start(1000)  # 《《《《《《《《《《《休息倒计时每1000毫秒更新；改间隔须同步调整每次减1的逻辑
+        self.rest_timer.start(1000)  # CONFIG: Update the rest countdown every 1000 ms; adjust the one-second decrement if changing this interval.
     
 
     def on_instructions_finished(self):
-        self.rest_remaining = 3  # 《《《《《《《《《《《说明页面结束后准备倒计时3秒
+        self.rest_remaining = 3  # CONFIG: Run a three-second preparation countdown after the instruction page.
 
-        self.updating_exp.emit("Preparation")  # 《《《《《《《《《《《准备倒计时时的侧栏状态文字
+        self.updating_exp.emit("Preparation")  # CONFIG: Sidebar status text during the preparation countdown.
         self.updating_reps.emit(0,0)
         self.show_title.emit(str(self.rest_remaining))
 
-        self.test_timer.start(1000)  # 《《《《《《《《《《《准备倒计时每1000毫秒更新；改间隔须同步调整每次减1的逻辑
+        self.test_timer.start(1000)  # CONFIG: Update the preparation countdown every 1000 ms; adjust the one-second decrement if changing this interval.
 
     
     def relay_message(self, message : str):
@@ -210,21 +210,21 @@ class Experiment(QObject):
             self.logger_message.emit("Experimental battery complete.")
             return
 
-        config = TRIALS[EXPERIMENT_SEQUENCE[self.current_trial]]  # 《《《《《《《《《《《按执行顺序读取当前块配置
+        config = TRIALS[EXPERIMENT_SEQUENCE[self.current_trial]]  # CONFIG: Read the current block configuration from the execution sequence.
         self.current_name = config["name"]
 
         self.show_title.emit(self.current_name)
 
         QTimer.singleShot(
-            2000,  # 《《《《《《《《《《《模块标题显示2000毫秒后进入说明页面
+            2000,  # CONFIG: Show the block title for 2000 ms before displaying instructions.
             lambda: self.show_instructions(config)
         )
 
     def show_instructions(self, config):
-        self.show_instruction.emit(config["Description"])  # 《《《《《《《《《《《将配置中的受试者提示语发送到画布
+        self.show_instruction.emit(config["Description"])  # CONFIG: Send participant instructions from the configuration to the canvas.
 
         QTimer.singleShot(
-            5000,  # 《《《《《《《《《《《受试者说明显示5000毫秒后进入准备倒计时
+            5000,  # CONFIG: Show participant instructions for 5000 ms before the preparation countdown.
             self.on_instructions_finished
         )
 
@@ -237,7 +237,7 @@ class Experiment(QObject):
         trial = self.trials[self.current_trial]
         self.logger_message.emit(f"{self.current_name} experiment started.")
         self.updating_exp.emit(self.current_name)
-        trial.start(self.fixation, self.target)  # 《《《《《《《《《《《开始当前块的重复刺激任务
+        trial.start(self.fixation, self.target)  # CONFIG: Start the repeated stimulus task for the current block.
         self.enable_pause.emit()
 
     def toggle_pause(self):

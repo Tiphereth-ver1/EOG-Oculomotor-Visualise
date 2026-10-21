@@ -20,8 +20,8 @@ class Data_Logger:
         self.json_path = self.output_dir / f"{stem}.json"
         self.file = self.txt_path.open("x", encoding="utf-8")
         self.file.write(
-            f"被试编号: {self.subject_id} | 姓名（英文）: {subject_info['subject_name']} | 年龄: {subject_info['age']} | "
-            f"CDR等级: {subject_info['cdr']} | 性别: {subject_info['gender']}\n"
+            f"Subject ID: {self.subject_id} | Name (English): {subject_info['subject_name']} | Age: {subject_info['age']} | "
+            f"CDR Rating: {subject_info['cdr']} | Gender: {subject_info['gender']}\n"
         )
         self.file.flush()
         self.main_data = {

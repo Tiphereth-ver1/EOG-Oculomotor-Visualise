@@ -1,2 +1,0 @@
-被试编号: 03 | 姓名（英文）: qwe | 年龄: 12 | CDR等级: 0.0 | 性别: 女
-[03:38:39.087] [+   0.001s] Experimental battery started.

@@ -21,16 +21,16 @@ class Overlap_Prosaccade(Trial):
         self.fixation_duration = 0
 
     def run(self, fixation : QGraphicsEllipseItem, target: QGraphicsEllipseItem):
-        self.fixation_duration = randint(self.fixation_min,self.fixation_max)  # 《《《《《《《《《《《随机中心注视时长，毫秒，下限包含，上限不包含
+        self.fixation_duration = randint(self.fixation_min,self.fixation_max)  # CONFIG: Random central fixation duration in milliseconds; lower bound inclusive, upper bound exclusive.
         print(self.fixation_duration)
-        fixation.move(0, 0)  # 《《《《《《《《《《《扫视任务中心点位置，可修改x/y坐标
+        fixation.move(0, 0)  # CONFIG: Central fixation position for saccade tasks; edit x/y coordinates here.
         fixation.setVisible(True)
         target.setVisible(False)
         self.schedule(
             self.fixation_duration, 
             partial(
                 self.show_target, 
-                direction = DIRECTIONS[randint(0,4)],  # 《《《《《《《《《《《四方向等概率随机抽取，不保证各方向次数均衡
+                direction = DIRECTIONS[randint(0,4)],  # CONFIG: Sample four directions with equal probability; direction counts are not guaranteed to balance.
                 fixation = fixation,
                 target = target))
     
@@ -38,20 +38,20 @@ class Overlap_Prosaccade(Trial):
             fixation : QGraphicsEllipseItem, 
             target: QGraphicsEllipseItem, 
             direction : Direction):
-        self.schedule(self.target_duration, partial(self.clean_graphics, fixation, target))  # 《《《《《《《《《《《外围目标显示target_duration毫秒后清屏并检查下一次重复
+        self.schedule(self.target_duration, partial(self.clean_graphics, fixation, target))  # CONFIG: Clear stimuli after target_duration milliseconds and check for the next repetition.
         if (direction == Direction.LEFT):
-            target.move(-self.shift,0)  # 《《《《《《《《《《《目标位于中心左侧shift，改shift调整偏移
+            target.move(-self.shift,0)  # CONFIG: Place the target shift units left of center; edit shift to change displacement.
             target.setVisible(True)
         if (direction == Direction.RIGHT):
-            target.move(self.shift,0)  # 《《《《《《《《《《《目标位于中心右侧shift
+            target.move(self.shift,0)  # CONFIG: Place the target shift units right of center.
             target.setVisible(True)
 
         if (direction == Direction.UP):
-            target.move(0,-self.shift)  # 《《《《《《《《《《《目标位于中心上方shift，Qt向上为负y
+            target.move(0,-self.shift)  # CONFIG: Place the target shift units above center; upward is negative y in Qt.
             target.setVisible(True)
 
         if (direction == Direction.DOWN):
-            target.move(0,self.shift)  # 《《《《《《《《《《《目标位于中心下方shift，Qt向下为正y
+            target.move(0,self.shift)  # CONFIG: Place the target shift units below center; downward is positive y in Qt.
             target.setVisible(True)
         
         self.send_message(f"Duration: {self.fixation_duration}, Direction: {direction.value}")

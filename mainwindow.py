@@ -44,18 +44,18 @@ class MainWindow(QMainWindow):
         self.experiment.pause_changed.connect(
             lambda paused: self.countdown_btn.setText("Resume" if paused else "Pause"))
         self.experiment.experiment_complete.connect(self.lock_completed_interface)
-        self.experiment.event_sent.connect(self.logger.add_event)  # 《《《《《《《《《《《转发事件字典；日志器当前将整个字典存入type字段
+        self.experiment.event_sent.connect(self.logger.add_event)  # CONFIG: Forward the event dictionary; the logger stores it in type, except for trial pause events.
         self.experiment.experiment_complete.connect(self.logger.save)
 
         self.setup_sidebar()
 
     def setup_sidebar(self):
         # Initial visibility and signal wiring belong to the controller.
-        self.status_box.hide()  # 《《《《《《《《《《《Debug日志框初始隐藏
+        self.status_box.hide()  # CONFIG: Hide the Debug log initially.
 
         # Connect signals
-        self.expt_btn.clicked.connect(self.expt_start)  # 《《《《《《《《《《《Experiment按钮启动实验调度
-        self.countdown_btn.clicked.connect(self.countdowner)  # 《《《《《《《《《《《Pause按钮切换倒计时，不中断刺激任务
+        self.expt_btn.clicked.connect(self.expt_start)  # CONFIG: Start experiment scheduling with the Experiment button.
+        self.countdown_btn.clicked.connect(self.countdowner)  # CONFIG: Connect the Pause button to the controller pause handler.
         self.status_btn.clicked.connect(self.toggle_status)
         self.connect_btn.clicked.connect(self.connection_request.emit)
     
@@ -85,13 +85,13 @@ class MainWindow(QMainWindow):
         subject_id = self.subject_id_input.text().strip()
         subject_name = self.subject_name_input.text().strip()
         if not re.fullmatch(r"[A-Za-z]+(?:[ '\-][A-Za-z]+)*", subject_name):
-            QMessageBox.warning(self, "被试姓名", "请输入英文姓名或拼音，例如 Zhang San；可使用空格、连字符和英文单引号。")
+            QMessageBox.warning(self, "Subject Name", "Enter an English name or pinyin, such as Zhang San. Spaces, hyphens, and apostrophes are allowed.")
             return
         if (not re.fullmatch(r"[A-Za-z0-9_-]+", subject_id)
                 or self.age_input.value() == 0
                 or self.cdr_input.currentIndex() == 0
                 or self.gender_input.currentIndex() == 0):
-            QMessageBox.warning(self, "被试信息不完整", "请填写年龄、CDR等级和性别。被试编号请使用字母、数字、下划线或连字符，例如 01。")
+            QMessageBox.warning(self, "Incomplete Subject Information", "Please enter age, CDR rating, and gender. Use letters, numbers, underscores, or hyphens for the subject ID, such as 01.")
             return
         subject_info = {
             "subject_id": subject_id,
@@ -103,19 +103,19 @@ class MainWindow(QMainWindow):
         try:
             self.logger.init_main_data(subject_info)
         except OSError as error:
-            QMessageBox.warning(self, "无法创建记录文件", str(error))
+            QMessageBox.warning(self, "Unable to Create Record File", str(error))
             return
         self.subject_group.setEnabled(False)
         self.expt_btn.setEnabled(False)
         self.logger.write_message("Experimental battery started.")
-        self.experiment.start(self.graphics.fixation, self.graphics.target)  # 《《《《《《《《《《《将两个圆点交给实验调度器，从首块开始
+        self.experiment.start(self.graphics.fixation, self.graphics.target)  # CONFIG: Pass both dots to the experiment scheduler and start with the first block.
     
     def toggle_status(self):
         self.status = not self.status
         if self.status:
             self.status_box.show()
         if not self.status:
-            self.status_box.hide()  # 《《《《《《《《《《《Debug日志框初始隐藏
+            self.status_box.hide()  # CONFIG: Hide the Debug log initially.
     
     def update_rep_status(self, current : int, total: int):
         self.reps_count.setText(f"{current}/{total}")
@@ -129,7 +129,7 @@ class MainWindow(QMainWindow):
             event.accept()
             return
 
-        if event.key() == Qt.Key_E:  # 《《《《《《《《《《《按E标记运动伪迹，可在此修改快捷键
+        if event.key() == Qt.Key_E:  # CONFIG: Press E to mark a motion artefact; change the shortcut here.
             self.logger.write_message("Motion artefact detected.")
             self.logger.add_event({
                 "type" : "ARTEFACT"

@@ -27,7 +27,7 @@ class _MainWindowLoader(QUiLoader):
 
 class Ui_MainWindow:
     def setupUi(self, window):
-        ui_path = Path(__file__).resolve().with_name("mainwindow.ui")  # 《《《《《《《《《《《运行时直接加载此UI，修改界面无需生成Python代码
+        ui_path = Path(__file__).resolve().with_name("mainwindow.ui")  # CONFIG: Load this UI at runtime; interface changes do not require generating Python code.
         ui_file = QFile(str(ui_path))
         if not ui_file.open(QIODevice.OpenModeFlag.ReadOnly):
             raise RuntimeError(f"Cannot open {ui_path}: {ui_file.errorString()}")

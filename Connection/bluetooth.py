@@ -14,21 +14,21 @@ class Serial_Worker(QObject):
 
     @Slot()
     def connect_port(self):
-        self.connection_status.emit("Trying to connect port (COM3)...")  # 《《《《《《《《《《《连接中的提示语，修改串口时同步修改此文字
+        self.connection_status.emit("Trying to connect port (COM3)...")  # CONFIG: Connection progress message; update this text when changing the serial port.
         try: 
             self.ser = serial.Serial(
-                port = "COM3",  # 《《《《《《《《《《《设备串口名称，按实际端口修改
-                baudrate = 9600,  # 《《《《《《《《《《《串口波特率，需与设备一致
-                bytesize = EIGHTBITS,  # 《《《《《《《《《《《数据位8位，按设备协议设置
-                stopbits = STOPBITS_ONE,  # 《《《《《《《《《《《停止位1位，按设备协议设置
+                port = "COM3",  # CONFIG: Device serial port; set this to the actual port.
+                baudrate = 9600,  # CONFIG: Serial baud rate; must match the device.
+                bytesize = EIGHTBITS,  # CONFIG: Eight data bits; configure according to the device protocol.
+                stopbits = STOPBITS_ONE,  # CONFIG: One stop bit; configure according to the device protocol.
                 xonxoff = False,
                 rtscts = False,
                 dsrdtr = False,
-                parity = PARITY_NONE,  # 《《《《《《《《《《《无校验，按设备协议设置
-                timeout = 1  # 《《《《《《《《《《《串口读取超时秒数，目前没有持续读取数据循环
+                parity = PARITY_NONE,  # CONFIG: No parity; configure according to the device protocol.
+                timeout = 1  # CONFIG: Serial read timeout in seconds; no continuous read loop is implemented.
                 )
             self.connection_established.emit()
-            self.connection_status.emit("Connection successful.")  # 《《《《《《《《《《《连接成功提示语，显示在Debug框
+            self.connection_status.emit("Connection successful.")  # CONFIG: Connection success message shown in the Debug log.
         except serial.SerialException as e:
             print(e)
             self.connection_status.emit(str(e))
@@ -39,11 +39,11 @@ class Serial_Worker(QObject):
 
     @Slot()
     def marker_high(self):
-        self.ser.write(b"111111")  # 《《《《《《《《《《《高标记字节协议，目前未连接到实验刺激事件
+        self.ser.write(b"111111")  # CONFIG: High marker bytes; currently not connected to experiment stimulus events.
 
     @Slot()
     def marker_low(self):
-        self.ser.write(b"000000")  # 《《《《《《《《《《《低标记字节协议，目前未连接到实验刺激事件
+        self.ser.write(b"000000")  # CONFIG: Low marker bytes; currently not connected to experiment stimulus events.
 
     @Slot()
     def disconnect_port(self):

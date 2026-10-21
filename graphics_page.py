@@ -33,15 +33,15 @@ class Graphics_Page(QGraphicsView):
     def apply_ui_properties(self):
         """Apply the Designer properties to items that are drawn in the scene."""
         self.graphics_scene.setSceneRect(self.sceneRect())
-        self.centerOn(0, 0)  # 《《《《《《《《《《《视图对准场景原点；场景坐标不是视角度数
+        self.centerOn(0, 0)  # CONFIG: Center the view on the scene origin; scene units are not visual degrees.
 
-        diameter = self._design_property("stimulusDiameter")  # 《《《《《《《《《《《圆点共用直径读取自mainwindow.ui
+        diameter = self._design_property("stimulusDiameter")  # CONFIG: Read the shared dot diameter from mainwindow.ui.
         for stimulus, color_name in (
             (self.fixation, "fixationColor"),
             (self.target, "targetColor"),
         ):
-            stimulus.setRect(-diameter / 2, -diameter / 2, diameter, diameter)  # 《《《《《《《《《《《圆点尺寸及中心坐标；若需两个点不同尺寸可在此分别设置
-            stimulus.setBrush(QBrush(self._design_property(color_name)))  # 《《《《《《《《《《《圆点填充色读取自UI的fixationColor和targetColor
+            stimulus.setRect(-diameter / 2, -diameter / 2, diameter, diameter)  # CONFIG: Set dot size and center; configure each dot here for different sizes.
+            stimulus.setBrush(QBrush(self._design_property(color_name)))  # CONFIG: Read dot fill colors from the UI fixationColor and targetColor properties.
 
         # The original module-level fonts used Qt's pre-QApplication DPI.
         # Keep their rendered size while reading font choices from the form.
@@ -50,11 +50,11 @@ class Graphics_Page(QGraphicsView):
         font_device.setDotsPerMeterX(dots_per_meter)
         font_device.setDotsPerMeterY(dots_per_meter)
 
-        self.title.setFont(QFont(self._design_property("titleFont"), font_device))  # 《《《《《《《《《《《标题字体字号读取自UI的titleFont
-        self.title.setDefaultTextColor(self._design_property("titleColor"))  # 《《《《《《《《《《《标题颜色读取自UI的titleColor
-        self.instructions.setFont(QFont(self._design_property("instructionsFont"), font_device))  # 《《《《《《《《《《《提示语字体字号读取自UI的instructionsFont
-        self.instructions.setDefaultTextColor(self._design_property("instructionsColor"))  # 《《《《《《《《《《《提示语颜色读取自UI的instructionsColor
-        self.instructions.setTextWidth(self._design_property("instructionsWidth"))  # 《《《《《《《《《《《提示语换行宽度读取自UI的instructionsWidth
+        self.title.setFont(QFont(self._design_property("titleFont"), font_device))  # CONFIG: Read the title font and size from the UI titleFont property.
+        self.title.setDefaultTextColor(self._design_property("titleColor"))  # CONFIG: Read the title color from the UI titleColor property.
+        self.instructions.setFont(QFont(self._design_property("instructionsFont"), font_device))  # CONFIG: Read the instruction font and size from the UI instructionsFont property.
+        self.instructions.setDefaultTextColor(self._design_property("instructionsColor"))  # CONFIG: Read the instruction color from the UI instructionsColor property.
+        self.instructions.setTextWidth(self._design_property("instructionsWidth"))  # CONFIG: Read the instruction wrapping width from the UI instructionsWidth property.
 
     def _design_property(self, name):
         value = self.property(name)
@@ -68,9 +68,9 @@ class Graphics_Page(QGraphicsView):
         self.title.setPlainText(text)
 
         rect = self.title.boundingRect()
-        self.title.setPos(  # 《《《《《《《《《《《标题位置计算入口
-            -rect.width() / 2,  # 《《《《《《《《《《《标题水平x居中坐标；加偏移向右／向下，减偏移向左／向上
-            -rect.height() / 2  # 《《《《《《《《《《《标题垂直y居中坐标；加偏移向右／向下，减偏移向左／向上
+        self.title.setPos(  # CONFIG: Calculate the title position.
+            -rect.width() / 2,  # CONFIG: Center the title horizontally; positive offsets move right/down, negative offsets left/up.
+            -rect.height() / 2  # CONFIG: Center the title vertically; positive offsets move right/down, negative offsets left/up.
         )
 
         self.title.show()    
@@ -82,7 +82,7 @@ class Graphics_Page(QGraphicsView):
 
         cursor = self.instructions.textCursor()
         block_format = QTextBlockFormat()
-        block_format.setAlignment(Qt.AlignmentFlag.AlignCenter)  # 《《《《《《《《《《《提示语段落居中，可改为AlignLeft或AlignRight
+        block_format.setAlignment(Qt.AlignmentFlag.AlignCenter)  # CONFIG: Center instruction paragraphs; use AlignLeft or AlignRight for other alignments.
 
         cursor.select(QTextCursor.SelectionType.Document)
         cursor.mergeBlockFormat(block_format)
@@ -90,9 +90,9 @@ class Graphics_Page(QGraphicsView):
         self.instructions.setTextCursor(cursor)
 
         rect = self.instructions.boundingRect()
-        self.instructions.setPos(  # 《《《《《《《《《《《提示语位置计算入口
-            -rect.width() / 2,  # 《《《《《《《《《《《提示语水平x居中坐标；加偏移向右／向下，减偏移向左／向上
-            -rect.height() / 2  # 《《《《《《《《《《《提示语垂直y居中坐标；加偏移向右／向下，减偏移向左／向上
+        self.instructions.setPos(  # CONFIG: Calculate the instruction position.
+            -rect.width() / 2,  # CONFIG: Center instructions horizontally; positive offsets move right/down, negative offsets left/up.
+            -rect.height() / 2  # CONFIG: Center instructions vertically; positive offsets move right/down, negative offsets left/up.
         )
 
         self.instructions.show()

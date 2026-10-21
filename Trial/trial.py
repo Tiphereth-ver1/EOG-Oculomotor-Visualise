@@ -10,7 +10,7 @@ class Direction(Enum):
     UP = "up"
     DOWN = "down"
 
-DIRECTIONS = [Direction.LEFT, Direction.RIGHT, Direction.UP, Direction.DOWN]  # 《《《《《《《《《《《可用方向；改列表长度须同步修改扫视模块randint(0,4)
+DIRECTIONS = [Direction.LEFT, Direction.RIGHT, Direction.UP, Direction.DOWN]  # CONFIG: Available directions; update randint(0,4) in saccade modules when changing the list length.
 
 
 # 1. Define the abstract base class
@@ -22,12 +22,12 @@ class Trial(QObject):
 
     def __init__(self):
         super().__init__()
-        self.reps = 3  # 《《《《《《《《《《《基类默认重复次数，被实验配置覆盖
+        self.reps = 3  # CONFIG: Default repetition count in the base class; overridden by experiment configuration.
         self.current_reps = 0
         self.phase = "idle"
         self._pending = []
         self._generation = 0
-        self.rest = 0  # 《《《《《《《《《《《基类默认重复间休息，当前仅注视与追踪模块使用
+        self.rest = 0  # CONFIG: Default rest between repetitions; currently used only by fixation and pursuit tasks.
     
     def start(self, fixation : QGraphicsEllipseItem, target: QGraphicsEllipseItem):
         self.cancel_callbacks()
